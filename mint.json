@@ -34,7 +34,7 @@
   "anchors": [
     {
       "name": "Playground",
-      "icon": "fa-solid fa-play",
+      "icon": "solid play",
       "url": "https://google.com"
     },
     {
