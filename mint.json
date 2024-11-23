@@ -66,17 +66,16 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "SDKs",
       "pages": [
-        "api-reference/introduction"
+        "sdks/node",
+        "sdks/python"
       ]
     },
     {
-      "group": "SDKs",
+      "group": "API Documentation",
       "pages": [
-        "sdks/overview",
-        "sdks/node",
-        "sdks/python"
+        "api-reference/introduction"
       ]
     },
     {

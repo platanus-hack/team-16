@@ -1,33 +1,223 @@
 ---
-title: 'Node'
-description: 'Example section for showcasing API endpoints'
+title: 'Node.js SDK'
+description: 'Official Node.js SDK for Scapester API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+Scapester Node.js SDK provides a simple wrapper around the Scapester API to help you transform web content into structured data.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Installation
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+Install the Scapester Node.js SDK using npm:
 
-## Authentication
+<CodeGroup>
+  ```bash npm
+  npm install scapester
+  ```
+</CodeGroup>
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+## Basic Usage
 
-```json
-"security": [
-  {
-    "bearerAuth": []
+1. Get an API key from [scapester.com](https://scapester.com)
+2. Set the API key as an environment variable `SCAPESTER_API_KEY` or pass it directly to the ScapesterApp class
+
+Here's a complete example with error handling:
+
+<CodeGroup>
+  ```typescript TypeScript
+  import { ScapesterApp, ScrapeParams, ScrapeResponse } from 'scapester';
+
+  const app = new ScapesterApp({apiKey: "sk-YOUR_API_KEY"});
+
+  // Scrape a website
+  const scrapeResponse = await app.scrapeUrl('https://example.com', {
+    formats: ['markdown', 'html'],
+  });
+
+  if (!scrapeResponse.success) {
+    throw new Error(`Failed to scrape: ${scrapeResponse.error}`)
   }
-]
-```
+
+  console.log(scrapeResponse);
+  ```
+
+  ```javascript JavaScript
+  const { ScapesterApp } = require('scapester');
+
+  const app = new ScapesterApp({apiKey: "sk-YOUR_API_KEY"});
+
+  // Scrape a website
+  const scrapeResponse = await app.scrapeUrl('https://example.com', {
+    formats: ['markdown', 'html'],
+  });
+
+  if (!scrapeResponse.success) {
+    throw new Error(`Failed to scrape: ${scrapeResponse.error}`)
+  }
+
+  console.log(scrapeResponse);
+  ```
+</CodeGroup>
+
+## Scraping a URL
+
+The `scrapeUrl` method is used to extract content from a single URL:
+
+<CodeGroup>
+  ```typescript TypeScript
+  // Basic scraping
+  const result = await app.scrapeUrl('example.com', { 
+      formats: ['markdown', 'html'] 
+  });
+
+  if (!result.success) {
+    throw new Error(`Failed to scrape: ${result.error}`)
+  }
+
+  console.log(result);
+
+  // With advanced options
+  const advancedResult = await app.scrapeUrl('example.com', {
+      formats: ['markdown', 'html', 'screenshot'],
+      screenshot: {
+          fullPage: true,
+          type: 'jpeg'
+      },
+      headers: {
+          'Cookie': 'session=abc123'
+      }
+  });
+  ```
+</CodeGroup>
+
+## Structured Data Extraction
+
+Extract specific data using schemas:
+
+<CodeGroup>
+  ```typescript TypeScript
+  const schema = {
+      type: 'object',
+      properties: {
+          title: { type: 'string' },
+          price: { type: 'number' },
+          features: { type: 'array', items: { type: 'string' } }
+      }
+  };
+
+  const result = await app.scrapeUrl('example.com', {
+      formats: ['extract'],
+      extract: {
+          schema: schema
+      }
+  });
+
+  if (!result.success) {
+      throw new Error(`Extraction failed: ${result.error}`);
+  }
+
+  console.log(result.data.extract);
+  ```
+</CodeGroup>
+
+## Page Interactions
+
+Interact with dynamic content before scraping:
+
+<CodeGroup>
+  ```typescript TypeScript
+  const result = await app.scrapeUrl('example.com', {
+      formats: ['markdown'],
+      actions: [
+          { type: "wait", milliseconds: 1000 },
+          { type: "click", selector: "#login-button" },
+          { type: "input", selector: "#email", value: "test@example.com" },
+          { type: "wait", milliseconds: 1000 },
+          { type: "scrape" }
+      ]
+  });
+  ```
+</CodeGroup>
+
+## Response Types
+
+### Successful Response
+
+<CodeGroup>
+  ```typescript TypeScript
+  interface SuccessResponse {
+      success: true;
+      data: {
+          markdown?: string;
+          html?: string;
+          screenshot?: string;
+          extract?: any;
+          metadata: {
+              title: string;
+              description: string;
+              language: string;
+              sourceURL: string;
+              statusCode: number;
+          }
+      }
+  }
+  ```
+</CodeGroup>
+
+### Error Response
+
+<CodeGroup>
+  ```typescript TypeScript
+  interface ErrorResponse {
+      success: false;
+      error: {
+          code: string;
+          message: string;
+          details?: any;
+      }
+  }
+  ```
+</CodeGroup>
+
+## Error Handling
+
+The SDK provides detailed error information when something goes wrong. Here's how to handle different types of errors:
+
+<CodeGroup>
+  ```typescript TypeScript
+  try {
+      const result = await app.scrapeUrl('example.com', {
+          formats: ['markdown']
+      });
+
+      if (!result.success) {
+          // Handle API-level errors
+          console.error(`API Error: ${result.error.message}`);
+          console.error(`Error Code: ${result.error.code}`);
+      } else {
+          console.log(result.data);
+      }
+  } catch (error) {
+      // Handle network or SDK-level errors
+      console.error('SDK Error:', error.message);
+  }
+  ```
+</CodeGroup>
+
+Common error codes:
+- `INVALID_URL`: The provided URL is not properly formatted
+- `TIMEOUT`: The request timed out
+- `ACCESS_DENIED`: Could not access the URL (403)
+- `NOT_FOUND`: URL not found (404)
+- `RATE_LIMITED`: Too many requests to the target website
+
+## Best Practices
+
+1. **Error Handling**: Always implement proper error handling as shown above
+2. **Rate Limiting**: Implement delays between requests to avoid rate limits
+3. **Resource Management**: Close connections and clean up resources when done
+4. **Validation**: Validate URLs and parameters before making requests
+5. **Timeout Handling**: Set appropriate timeouts for your use case
+
+For more details about available parameters and options, refer to our [API Reference](/api-reference).
