@@ -24,9 +24,7 @@ async def scrape_url(
     Scrape a single URL with advanced options
     """
     try:
-        result = await crawler.scrape_url(
-            str(request.url), request.options.dict() if request.options else None
-        )
+        result = await crawler.scrape_url(str(request.url), None)
         return {"success": True, "data": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
