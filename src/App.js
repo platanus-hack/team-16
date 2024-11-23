@@ -3,7 +3,7 @@ import { auth } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import Auth from './components/Auth';
 import { ToastProvider } from "./components/ui/toast";
-// import { Toaster } from "./components/ui/toaster";
+/// import { Toaster } from "./components/ui/toaster";
 
 function App() {
   const [user, setUser] = useState(null);
