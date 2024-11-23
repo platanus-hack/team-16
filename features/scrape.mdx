@@ -1,4 +1,188 @@
 ---
 title: 'Scrape'
-description: 'Example section for showcasing API endpoints'
+description: 'Transform any URL into clean, structured data'
 ---
+
+## Overview
+
+Scapester converts web pages into clean, structured formats ideal for data processing and LLM applications.
+
+- **Smart Handling**: Manages proxies, rate limits, and JavaScript-rendered content
+- **Multiple Formats**: Outputs clean markdown, structured JSON, raw HTML, or screenshots
+- **Intelligent Extraction**: Extract specific data using schemas or natural language prompts
+
+## Basic Scraping
+
+### Installation
+
+```
+
+## Extraction Without Schema
+
+Extract data using natural language prompts:
+
+<CodeGroup>
+```bash curl
+curl -X POST https://api.scapester.com/v1/scrape \
+    -H 'Content-Type: application/json' \
+    -H 'Authorization: Bearer sk-YOUR_API_KEY' \
+    -d '{
+      "url": "https://example.com",
+      "formats": ["extract"],
+      "extract": {
+        "prompt": "Extract the product pricing and features from the page."
+      }
+    }'
+```
+
+```python
+from scapester import ScapesterApp
+
+app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+
+result = app.scrape_url('example.com', {
+    'formats': ['extract'],
+    'extract': {
+        'prompt': 'Extract the product pricing and features from the page.'
+    }
+})
+print(result['extract'])
+```
+
+```javascript
+const app = new ScapesterApp('sk-YOUR_API_KEY');
+
+const result = await app.scrapeUrl('example.com', {
+    formats: ['extract'],
+    extract: {
+        prompt: 'Extract the product pricing and features from the page.'
+    }
+});
+console.log(result.extract);
+```
+</CodeGroup>
+
+## Advanced Features
+
+### Screenshots
+
+Capture visual snapshots of web pages:
+
+<CodeGroup>
+```python
+result = app.scrape_url('example.com', 
+    params={
+        'formats': ['screenshot'],
+        'screenshot': {
+            'fullPage': True,
+            'type': 'jpeg',
+            'quality': 80
+        }
+    }
+)
+```
+
+```javascript
+const result = await app.scrapeUrl('example.com', {
+    formats: ['screenshot'],
+    screenshot: {
+        fullPage: true,
+        type: 'jpeg',
+        quality: 80
+    }
+});
+```
+</CodeGroup>
+
+### Custom Headers
+
+Add authentication or custom headers to your requests:
+
+<CodeGroup>
+```python
+result = app.scrape_url('example.com', 
+    params={
+        'formats': ['markdown'],
+        'headers': {
+            'Authorization': 'Bearer token123',
+            'Cookie': 'session=abc123'
+        }
+    }
+)
+```
+
+```javascript
+const result = await app.scrapeUrl('example.com', {
+    formats: ['markdown'],
+    headers: {
+        'Authorization': 'Bearer token123',
+        'Cookie': 'session=abc123'
+    }
+});
+```
+</CodeGroup>
+
+### Wait for Selectors
+
+Wait for specific elements to appear before scraping:
+
+<CodeGroup>
+```python
+result = app.scrape_url('example.com', 
+    params={
+        'formats': ['markdown'],
+        'actions': [
+            {"type": "waitForSelector", "selector": "#dynamic-content"},
+            {"type": "scrape"}
+        ]
+    }
+)
+```
+
+```javascript
+const result = await app.scrapeUrl('example.com', {
+    formats: ['markdown'],
+    actions: [
+        {type: "waitForSelector", selector: "#dynamic-content"},
+        {type: "scrape"}
+    ]
+});
+```
+</CodeGroup>
+
+## Error Handling
+
+Scapester provides detailed error information when something goes wrong:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_URL",
+    "message": "The provided URL is not valid",
+    "details": {
+      "url": "not-a-valid-url"
+    }
+  }
+}
+```
+
+Common error codes include:
+- `INVALID_URL`: The provided URL is not properly formatted
+- `TIMEOUT`: The request timed out
+- `ACCESS_DENIED`: Could not access the URL (403)
+- `NOT_FOUND`: URL not found (404)
+- `RATE_LIMITED`: Too many requests to the target website
+
+## Best Practices
+
+1. **Rate Limiting**: Implement appropriate delays between requests
+2. **Error Handling**: Always handle potential errors in your code
+3. **Selective Extraction**: Only extract the data you need
+4. **Cache Results**: Store and reuse results when possible
+5. **Respect Robots.txt**: Check if scraping is allowed for the target URL
+
+For more details about available parameters and options, refer to our [API Reference](/api-reference).
+```
+
+Would you like me to continue with any additional sections or make any modifications to what I've shown so far?
