@@ -23,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://app.scrapester.lol/"
+    "url": "https://scrapester.lol/"
   },
   "tabs": [
     {
@@ -39,7 +39,7 @@
     {
       "name": "Playground",
       "icon": "play",
-      "url": "https://app.scrapester.lol/"
+      "url": "https://scrapester.lol/"
     },
     {
       "name": "Community",
