@@ -20,8 +20,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="WebCrawler API",
-    description="High-performance web crawler with caching and advanced features",
+    title="Scrapester API",
+    description="High-performance web crawler",
     version="1.0.0",
     lifespan=lifespan,
 )
