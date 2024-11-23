@@ -10,49 +10,43 @@ Scapester is an API service that transforms web content into clean, structured d
 ## Installation
 
 <CodeGroup>
-  <CodeBlock label="npm" active>
-    ```bash
-    npm install scapester
-    ```
-  </CodeBlock>
-  <CodeBlock label="pip">
-    ```bash
-    pip install scapester-py
-    ```
-  </CodeBlock>
+```bash npm
+npm install scapester
+```
+
+```bash pip
+pip install scapester-py
+```
 </CodeGroup>
 
 ## Basic Usage
 
 <CodeGroup>
-  <CodeBlock label="Python" active>
-    ```python
-    from scapester import ScapesterApp
+```javascript node
+import { ScapesterApp } from 'scapester';
 
-    app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+const app = new ScapesterApp('sk-YOUR_API_KEY');
 
-    # Scrape a website
-    result = app.scrape_url(
-        'https://example.com',
-        params={'formats': ['markdown', 'html']}
-    )
-    print(result)
-    ```
-  </CodeBlock>
-  <CodeBlock label="JavaScript">
-    ```javascript
-    import { ScapesterApp } from 'scapester';
+// Scrape a website
+const result = await app.scrapeUrl(
+    'https://example.com',
+    { formats: ['markdown', 'html'] }
+);
+console.log(result);
+```
 
-    const app = new ScapesterApp('sk-YOUR_API_KEY');
+```python python
+from scapester import ScapesterApp
 
-    // Scrape a website
-    const result = await app.scrapeUrl(
-        'https://example.com',
-        { formats: ['markdown', 'html'] }
-    );
-    console.log(result);
-    ```
-  </CodeBlock>
+app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+
+# Scrape a website
+result = app.scrape_url(
+    'https://example.com',
+    params={'formats': ['markdown', 'html']}
+)
+print(result)
+```
 </CodeGroup>
 
 ## Response Format
