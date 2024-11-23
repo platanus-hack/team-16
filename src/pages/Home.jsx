@@ -1,8 +1,18 @@
+import { Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const { GithubIcon, InfoIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
 const { Button } = require('../components/ui/button');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
 
+
 export default function Home() {
+    const navigate = useNavigate();
+
+    const handleGetStarted = () => {
+      navigate('/login');
+    };
+      
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 container mx-auto px-4 py-8 md:py-16 space-y-16">
@@ -24,11 +34,16 @@ export default function Home() {
             A powerful and easy-to-use web scraping library for Node.js. Extract data from websites with minimal code and maximum efficiency.
           </p>
           <div className="flex justify-center gap-4 pt-4">
-            <Button size="lg" className="gap-2">
+          <Button size="lg" className="gap-2" onClick={handleGetStarted}>
               <Terminal className="h-4 w-4" />
               Get Started
             </Button>
-            <Button size="lg" variant="outline" className="gap-2">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="gap-2"
+              onClick={() => window.open('https://github.com/yourusername/scrapester', '_blank')}
+            >
               <GithubIcon className="h-4 w-4" />
               View on GitHub
             </Button>
@@ -102,7 +117,7 @@ console.log(result.data);`}
             </div>
           </CardContent>
           <CardFooter className="flex justify-center gap-4 pt-6">
-            <Button asChild>
+            <Button asChild onClick={handleGetStarted}>
               <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="gap-2">
                 <Code className="h-4 w-4" />
                 Get Started
