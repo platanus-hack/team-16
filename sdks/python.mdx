@@ -1,33 +1,247 @@
 ---
-title: 'Python'
-description: 'Example section for showcasing API endpoints'
+title: 'Python SDK'
+description: 'Official Python SDK for Scapester API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+Scapester Python SDK provides a simple wrapper around the Scapester API to help you transform web content into structured data.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Installation
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+Install the Scapester Python SDK using pip:
 
-## Authentication
+<CodeGroup>
+  ```bash pip
+  pip install scapester-py
+  ```
+</CodeGroup>
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+## Basic Usage
 
-```json
-"security": [
+1. Get an API key from [scapester.com](https://scapester.com)
+2. Set the API key as an environment variable `SCAPESTER_API_KEY` or pass it directly to the ScapesterApp class
+
+Here's a complete example:
+
+<CodeGroup>
+  ```python Python
+  from scapester import ScapesterApp
+
+  app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+
+  # Scrape a website
+  scrape_result = app.scrape_url(
+      'https://example.com',
+      params={'formats': ['markdown', 'html']}
+  )
+  print(scrape_result)
+  ```
+</CodeGroup>
+
+## Scraping a URL
+
+The `scrape_url` method is used to extract content from a single URL:
+
+<CodeGroup>
+  ```python Python
+  # Basic scraping
+  result = app.scrape_url(
+      'example.com',
+      params={'formats': ['markdown', 'html']}
+  )
+  print(result)
+
+  # With advanced options
+  advanced_result = app.scrape_url(
+      'example.com',
+      params={
+          'formats': ['markdown', 'html', 'screenshot'],
+          'screenshot': {
+              'fullPage': True,
+              'type': 'jpeg'
+          },
+          'headers': {
+              'Cookie': 'session=abc123'
+          }
+      }
+  )
+  ```
+</CodeGroup>
+
+## Structured Data Extraction
+
+Extract specific data using Pydantic schemas:
+
+<CodeGroup>
+  ```python Python
+  from pydantic import BaseModel
+  from typing import List
+
+  class ProductSchema(BaseModel):
+      title: str
+      price: float
+      features: List[str]
+
+  result = app.scrape_url(
+      'example.com',
+      params={
+          'formats': ['extract'],
+          'extract': {
+              'schema': ProductSchema.model_json_schema()
+          }
+      }
+  )
+  print(result['extract'])
+  ```
+</CodeGroup>
+
+## Page Interactions
+
+Interact with dynamic content before scraping:
+
+<CodeGroup>
+  ```python Python
+  result = app.scrape_url(
+      'example.com',
+      params={
+          'formats': ['markdown'],
+          'actions': [
+              {"type": "wait", "milliseconds": 1000},
+              {"type": "click", "selector": "#login-button"},
+              {"type": "input", "selector": "#email", "value": "test@example.com"},
+              {"type": "wait", "milliseconds": 1000},
+              {"type": "scrape"}
+          ]
+      }
+  )
+  ```
+</CodeGroup>
+
+## Response Format
+
+### Successful Response
+
+<CodeGroup>
+  ```python Python
   {
-    "bearerAuth": []
+      "success": True,
+      "data": {
+          "markdown": "# Example Page\nContent here...",
+          "html": "<!DOCTYPE html><html>...</html>",
+          "screenshot": "base64_encoded_image_data",
+          "metadata": {
+              "title": "Example Page",
+              "description": "Page description",
+              "language": "en",
+              "sourceURL": "https://example.com",
+              "statusCode": 200
+          }
+      }
   }
-]
-```
+  ```
+</CodeGroup>
+
+### Error Response
+
+<CodeGroup>
+  ```python Python
+  {
+      "success": False,
+      "error": {
+          "code": "INVALID_URL",
+          "message": "The provided URL is not valid",
+          "details": {
+              "url": "not-a-valid-url"
+          }
+      }
+  }
+  ```
+</CodeGroup>
+
+## Error Handling
+
+The SDK provides comprehensive error handling. Here's how to handle different types of errors:
+
+<CodeGroup>
+  ```python Python
+  from scapester.exceptions import ScapesterError, APIError
+
+  try:
+      result = app.scrape_url(
+          'example.com',
+          params={'formats': ['markdown']}
+      )
+      
+      if not result['success']:
+          # Handle API-level errors
+          print(f"API Error: {result['error']['message']}")
+          print(f"Error Code: {result['error']['code']}")
+      else:
+          print(result['data'])
+          
+  except APIError as e:
+      # Handle API-related errors
+      print(f"API Error: {e.message}")
+      print(f"Status Code: {e.status_code}")
+      
+  except ScapesterError as e:
+      # Handle SDK-level errors
+      print(f"SDK Error: {str(e)}")
+      
+  except Exception as e:
+      # Handle unexpected errors
+      print(f"Unexpected error: {str(e)}")
+  ```
+</CodeGroup>
+
+Common error codes:
+- `INVALID_URL`: The provided URL is not properly formatted
+- `TIMEOUT`: The request timed out
+- `ACCESS_DENIED`: Could not access the URL (403)
+- `NOT_FOUND`: URL not found (404)
+- `RATE_LIMITED`: Too many requests to the target website
+
+## Advanced Features
+
+### Custom Headers
+
+Add authentication or custom headers to your requests:
+
+<CodeGroup>
+  ```python Python
+  result = app.scrape_url(
+      'example.com',
+      params={
+          'formats': ['markdown'],
+          'headers': {
+              'Authorization': 'Bearer token123',
+              'Cookie': 'session=abc123'
+          }
+      }
+  )
+  ```
+</CodeGroup>
+
+### Proxy Configuration
+
+Use custom proxies for your requests:
+
+<CodeGroup>
+  ```python Python
+  app = ScapesterApp(
+      api_key="sk-YOUR_API_KEY",
+      proxy="http://proxy.example.com:8080"
+  )
+  ```
+</CodeGroup>
+
+## Best Practices
+
+1. **Error Handling**: Always implement proper error handling as shown above
+2. **Rate Limiting**: Implement delays between requests to avoid rate limits
+3. **Resource Management**: Use context managers when appropriate
+4. **Validation**: Validate URLs and parameters before making requests
+5. **Timeout Handling**: Set appropriate timeouts for your use case
+
+For more details about available parameters and options, refer to our [API Reference](/api-reference).
