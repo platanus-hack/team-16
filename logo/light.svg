@@ -1,30 +1,30 @@
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Body -->
-  <circle cx="100" cy="90" r="40" fill="#574B90" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="26 26 147.2 127.60000000000001" style="max-height: 500px" width="147.2" height="127.60000000000001">
   
-  <!-- Face -->
-  <circle cx="85" cy="80" r="12" fill="white" /> <!-- Left eye background -->
-  <circle cx="115" cy="80" r="12" fill="white" /> <!-- Right eye background -->
-  <circle cx="85" cy="80" r="8" fill="#2C2C54" /> <!-- Left eye -->
-  <circle cx="115" cy="80" r="8" fill="#2C2C54" /> <!-- Right eye -->
-  <circle cx="82" cy="77" r="3" fill="white" /> <!-- Left eye shine -->
-  <circle cx="112" cy="77" r="3" fill="white" /> <!-- Right eye shine -->
+  <circle fill="#574B90" r="40" cy="90" cx="100"/>
   
-  <!-- Kawaii blush -->
-  <circle cx="75" cy="95" r="8" fill="#FF9999" opacity="0.5" />
-  <circle cx="125" cy="95" r="8" fill="#FF9999" opacity="0.5" />
   
-  <!-- Cute smile -->
-  <path d="M90 95 Q100 105 110 95" stroke="#2C2C54" stroke-width="3" fill="none" />
+  <circle fill="white" r="12" cy="80" cx="85"/> 
+  <circle fill="white" r="12" cy="80" cx="115"/> 
+  <circle fill="#2C2C54" r="8" cy="80" cx="85"/> 
+  <circle fill="#2C2C54" r="8" cy="80" cx="115"/> 
+  <circle fill="white" r="3" cy="77" cx="82"/> 
+  <circle fill="white" r="3" cy="77" cx="112"/> 
   
-  <!-- Legs -->
-  <!-- Left side legs -->
-  <path d="M65 85 Q45 85 35 70" stroke="#574B90" stroke-width="6" fill="none" />
-  <path d="M65 90 Q40 90 30 90" stroke="#574B90" stroke-width="6" fill="none" />
-  <path d="M65 95 Q45 105 35 110" stroke="#574B90" stroke-width="6" fill="none" />
   
-  <!-- Right side legs -->
-  <path d="M135 85 Q155 85 165 70" stroke="#574B90" stroke-width="6" fill="none" />
-  <path d="M135 90 Q160 90 170 90" stroke="#574B90" stroke-width="6" fill="none" />
-  <path d="M135 95 Q155 105 165 110" stroke="#574B90" stroke-width="6" fill="none" />
+  <circle opacity="0.5" fill="#FF9999" r="8" cy="95" cx="75"/>
+  <circle opacity="0.5" fill="#FF9999" r="8" cy="95" cx="125"/>
+  
+  
+  <path fill="none" stroke-width="3" stroke="#2C2C54" d="M90 95 Q100 105 110 95"/>
+  
+  
+  
+  <path fill="none" stroke-width="6" stroke="#574B90" d="M65 85 Q45 85 35 70"/>
+  <path fill="none" stroke-width="6" stroke="#574B90" d="M65 90 Q40 90 30 90"/>
+  <path fill="none" stroke-width="6" stroke="#574B90" d="M65 95 Q45 105 35 110"/>
+  
+  
+  <path fill="none" stroke-width="6" stroke="#574B90" d="M135 85 Q155 85 165 70"/>
+  <path fill="none" stroke-width="6" stroke="#574B90" d="M135 90 Q160 90 170 90"/>
+  <path fill="none" stroke-width="6" stroke="#574B90" d="M135 95 Q155 105 165 110"/>
 </svg>
