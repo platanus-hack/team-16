@@ -47,9 +47,19 @@ function App() {
           {/* Navbar */}
           <nav className="border-b px-4 py-3">
             <div className="mx-auto flex justify-between items-center">
-              <Link to="/" className="text-lg font-semibold">
-                Scrapester
-              </Link>
+
+
+                <Link to="/" className="text-lg font-semibold flex justify-center items-center">
+                  <img
+                    className="dark:invert  mr-2"
+                    src="/LOGO.png"
+                    alt="Scrapester logo"
+                    width={40}
+                    height={30}
+                  />
+                  Scrapester
+                </Link>
+
               <div className="flex items-center gap-4">
                 {user ? (
                   <>
@@ -59,7 +69,7 @@ function App() {
                           variant="ghost" 
                           className="relative h-10 w-10 rounded-full"
                         >
-                          <Avatar className="h-10 w-10">
+                          <Avatar className="h-10 w-10 border border-black">
                             <AvatarImage 
                               src={user.photoURL} 
                               alt={user.displayName || "Usuario"} 
