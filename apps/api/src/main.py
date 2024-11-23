@@ -43,3 +43,8 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # Include routers
 app.include_router(crawl.router, prefix="/v1", tags=["crawler"])
+
+
+@app.get("/openapi.json", include_in_schema=False)
+async def get_openapi_json():
+    return app.openapi()
