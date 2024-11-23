@@ -1,0 +1,237 @@
+---
+title: 'Crawl'
+description: 'Recursively crawl websites and extract structured content'
+---
+
+## Overview
+
+Scapester can recursively crawl through websites, gathering content from all accessible pages while handling:
+
+- **Smart Navigation**: Uses sitemaps and follows links intelligently
+- **Dynamic Content**: Handles JavaScript-rendered content and single-page applications
+- **Rate Limiting**: Respects robots.txt and implements smart rate limiting
+- **Clean Output**: Converts all content into markdown or structured formats
+
+## How It Works
+
+1. **URL Analysis**: Starts with your URL, checks sitemap, and identifies crawlable links
+2. **Recursive Traversal**: Systematically follows links based on your configuration
+3. **Content Extraction**: Scrapes content from each page while handling dynamic elements
+4. **Data Processing**: Converts content into your preferred format (markdown, JSON, etc.)
+
+## Basic Crawling
+
+### Installation
+
+<CodeGroup>
+```bash npm
+npm install scapester
+```
+
+```bash pip
+pip install scapester-py
+```
+</CodeGroup>
+
+### Usage
+
+<CodeGroup>
+```python Python
+from scapester import ScapesterApp
+
+app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+
+# Crawl a website
+crawl_status = app.crawl_url(
+    'https://example.com',
+    params={
+        'limit': 100,
+        'scrapeOptions': {
+            'formats': ['markdown', 'html']
+        }
+    },
+    poll_interval=30
+)
+print(crawl_status)
+```
+
+```javascript Node
+import { ScapesterApp } from 'scapester';
+
+const app = new ScapesterApp('sk-YOUR_API_KEY');
+
+// Crawl a website
+const crawlStatus = await app.crawlUrl('https://example.com', {
+    limit: 100,
+    scrapeOptions: {
+        formats: ['markdown', 'html']
+    }
+});
+console.log(crawlStatus);
+```
+</CodeGroup>
+
+### Response Format
+
+When using async crawl functions or direct API calls, you'll receive a job ID:
+
+```json
+{
+  "success": true,
+  "id": "crawl-123-456-789",
+  "url": "https://api.scapester.com/v1/crawl/crawl-123-456-789"
+}
+```
+
+## Checking Crawl Status
+
+Monitor the progress of your crawl job:
+
+<CodeGroup>
+```python Python
+# Check crawl status
+status = app.check_crawl_status("<crawl_id>")
+print(status)
+```
+
+```javascript Node
+// Check crawl status
+const status = await app.checkCrawlStatus("<crawl_id>");
+console.log(status);
+```
+</CodeGroup>
+
+### Status Response
+
+The response varies based on the crawl's progress:
+
+```json
+{
+  "status": "scraping",
+  "total": 36,
+  "completed": 10,
+  "creditsUsed": 10,
+  "expiresAt": "2024-00-00T00:00:00.000Z",
+  "next": "https://api.scapester.com/v1/crawl/123-456-789?skip=10",
+  "data": [
+    {
+      "markdown": "# Example Page\nContent here...",
+      "html": "<!DOCTYPE html><html>...</html>",
+      "metadata": {
+        "title": "Example Page",
+        "language": "en",
+        "sourceURL": "https://example.com/page-1",
+        "description": "Page description",
+        "statusCode": 200
+      }
+    }
+  ]
+}
+```
+
+## Real-time Crawling with WebSockets
+
+Monitor crawl progress in real-time:
+
+<CodeGroup>
+```python Python
+import asyncio
+from scapester import ScapesterApp
+
+app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+
+def on_document(detail):
+    print("Document:", detail)
+
+def on_error(detail):
+    print("Error:", detail['error'])
+
+def on_done(detail):
+    print("Completed:", detail['status'])
+
+async def start_crawl():
+    watcher = app.crawl_url_and_watch(
+        'example.com',
+        {
+            'excludePaths': ['blog/*'],
+            'limit': 5
+        }
+    )
+
+    watcher.add_event_listener("document", on_document)
+    watcher.add_event_listener("error", on_error)
+    watcher.add_event_listener("done", on_done)
+
+    await watcher.connect()
+
+# Run the crawl
+asyncio.run(start_crawl())
+```
+
+```javascript Node
+const app = new ScapesterApp('sk-YOUR_API_KEY');
+
+const watcher = await app.crawlUrlAndWatch('example.com', {
+    excludePaths: ['blog/*'],
+    limit: 5
+});
+
+watcher.addEventListener("document", (doc) => {
+    console.log("Document:", doc.detail);
+});
+
+watcher.addEventListener("error", (err) => {
+    console.error("Error:", err.detail.error);
+});
+
+watcher.addEventListener("done", (state) => {
+    console.log("Completed:", state.detail.status);
+});
+```
+</CodeGroup>
+
+## Webhook Integration
+
+Receive real-time updates about your crawl progress:
+
+```bash
+curl -X POST https://api.scapester.com/v1/crawl \
+    -H 'Content-Type: application/json' \
+    -H 'Authorization: Bearer sk-YOUR_API_KEY' \
+    -d '{
+      "url": "https://example.com",
+      "limit": 100,
+      "webhook": "https://your-domain.com/webhook"
+    }'
+```
+
+### Webhook Events
+
+Scapester sends four types of webhook events:
+
+- `crawl.started`: When the crawl begins
+- `crawl.page`: For each successfully crawled page
+- `crawl.completed`: When the entire crawl finishes
+- `crawl.failed`: If the crawl encounters an error
+
+### Webhook Response Format
+
+```json
+{
+  "success": true,
+  "type": "crawl.page",
+  "id": "crawl-123-456-789",
+  "data": [{
+    "markdown": "# Page Content...",
+    "html": "<!DOCTYPE html>...",
+    "metadata": {
+      "title": "Page Title",
+      "language": "en",
+      "sourceURL": "https://example.com/page-1",
+      "description": "Page description",
+      "statusCode": 200
+    }
+  }]
+}
+
+For more details about available parameters and options, refer to our [API Reference](/api-reference).

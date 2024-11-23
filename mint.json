@@ -27,12 +27,12 @@
   },
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
-    },
-    {
       "name": "SDKs",
       "url": "sdks"
+    },
+    {
+      "name": "API Reference",
+      "url": "api-reference"
     }
   ],
   "anchors": [
@@ -62,7 +62,8 @@
     {
       "group": "Features",
       "pages": [
-        "features/scrape"
+        "features/scrape",
+        "features/crawl"
       ]
     },
     {
