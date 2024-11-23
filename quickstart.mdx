@@ -10,11 +10,11 @@ Scapester is an API service that transforms web content into clean, structured d
 ## Installation
 
 <CodeGroup>
-```bash npm
+```bash Node
 npm install scapester
 ```
 
-```bash pip
+```bash Python
 pip install scapester-py
 ```
 </CodeGroup>
@@ -22,7 +22,7 @@ pip install scapester-py
 ## Basic Usage
 
 <CodeGroup>
-```javascript node
+```javascript Node
 import { ScapesterApp } from 'scapester';
 
 const app = new ScapesterApp('sk-YOUR_API_KEY');
@@ -35,7 +35,7 @@ const result = await app.scrapeUrl(
 console.log(result);
 ```
 
-```python python
+```python Python
 from scapester import ScapesterApp
 
 app = ScapesterApp(api_key="sk-YOUR_API_KEY")
