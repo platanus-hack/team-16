@@ -1,29 +1,41 @@
-FROM python:3.12.7-slim
+# Define function directory
+ARG FUNCTION_DIR="/src"
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg \
-    && rm -rf /var/lib/apt/lists/*
+FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy as build-image
 
-# Install Chrome and dependencies for Playwright
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
-    && apt-get update \
-    && apt-get install -y google-chrome-stable \
-    && rm -rf /var/lib/apt/lists/*
+# Install aws-lambda-cpp build dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    g++ \
+    make \
+    cmake \
+    unzip \
+    libcurl4-openssl-dev 
+# Include global arg in this stage of the build
+ARG FUNCTION_DIR
+# Create function directory
+RUN mkdir -p ${FUNCTION_DIR}
 
-WORKDIR /app
+# Copy function code
+COPY ./src ${FUNCTION_DIR}
 
-# Copy requirements and install dependencies
-COPY requirements.txt .
+# Install Playwright
+RUN pip3 install playwright
+
+# Run Playwright install to ensure all necessary browser binaries are installed
+RUN playwright install
+
+# Multi-stage build: grab a fresh copy of the base image
+FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
+
+# Include global arg in this stage of the build
+ARG FUNCTION_DIR
+# Set working directory to function root directory
+WORKDIR ${FUNCTION_DIR}
+
+# Copy in the build image dependencies
+COPY --from=build-image ${FUNCTION_DIR} ${FUNCTION_DIR}
+# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright browser
-RUN playwright install chromium
-
-# Copy application code
-COPY . .
-
-# Run the application
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD [ "uvicorn","src.main:app", "--host","0.0.0.0", "--port", "80" ]

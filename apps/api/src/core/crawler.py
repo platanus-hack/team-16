@@ -21,7 +21,7 @@ class ScrapesterCrawler:
         """Initialize the browser instance"""
         self.playwright = await async_playwright().start()
         self.browser = await self.playwright.chromium.launch(
-            headless=True, args=["--no-sandbox", "--disable-setuid-sandbox"]
+            headless=False, args=["--no-sandbox", "--disable-setuid-sandbox"]
         )
         self.context = await self.browser.new_context(
             viewport={"width": 1920, "height": 1080},
