@@ -1,0 +1,61 @@
+# Source
+src/
+tests/
+examples/
+docs/
+
+# Configuration files
+.eslintrc
+.prettierrc
+.editorconfig
+.gitignore
+tsconfig.json
+jest.config.js
+.travis.yml
+.github/
+.vscode/
+
+# Development files
+*.test.ts
+*.spec.ts
+coverage/
+.nyc_output/
+.circleci/
+
+# Documentation
+docs/
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Build tools
+webpack.config.js
+rollup.config.js
+babel.config.js
+tsup.config.ts
+
+# Git
+.git/
+.gitignore
+
+# Development environment
+.env*
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.eslintcache
+.npm
+.yarn
+
+# Test files
+__tests__/
+__mocks__/
+*.test.ts
+*.spec.ts
+test/
