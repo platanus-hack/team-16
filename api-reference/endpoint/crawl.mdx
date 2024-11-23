@@ -1,4 +1,158 @@
 ---
 title: 'Crawl'
-openapi: 'POST /plants'
+openapi: 'POST /v1/crawl'
 ---
+
+The Crawl endpoint allows you to crawl an entire website with advanced options. It follows links and extracts content from multiple pages according to your specified parameters.
+
+### Authentication
+
+<ParamField header="Authorization" type="string" required>
+  Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="url" type="string" required>
+  The URL of the website to crawl. Must be a valid URI with maximum length of 2083 characters.
+</ParamField>
+
+<ParamField body="options" type="object">
+  <Expandable title="options">
+    <ParamField body="max_pages" type="integer" default="10">
+      Maximum number of pages to crawl
+    </ParamField>
+
+    <ParamField body="max_depth" type="integer" default="3">
+      Maximum depth of crawling from the starting URL
+    </ParamField>
+
+    <ParamField body="timeout" type="integer" default="30000">
+      Timeout in milliseconds for each request
+    </ParamField>
+
+    <ParamField body="scroll" type="boolean" default="true">
+      Whether to scroll pages while crawling
+    </ParamField>
+
+    <ParamField body="screenshot" type="boolean" default="false">
+      Whether to capture screenshots of pages
+    </ParamField>
+
+    <ParamField body="wait_for_selector" type="string">
+      CSS selector to wait for before crawling each page
+    </ParamField>
+
+    <ParamField body="actions" type="array">
+      List of actions to perform on each page
+      <Expandable title="Action Object">
+        <ParamField body="type" type="string" required>
+          One of: "click", "type", "wait", "scroll"
+        </ParamField>
+        
+        <ParamField body="selector" type="string">
+          CSS selector for the element to interact with
+        </ParamField>
+        
+        <ParamField body="text" type="string">
+          Text to type (for "type" action)
+        </ParamField>
+        
+        <ParamField body="duration" type="integer">
+          Duration in milliseconds (for "wait" or "scroll" actions)
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the crawl was successful
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  The crawled data from the website
+</ResponseField>
+
+### Error Responses
+
+<ResponseField name="error" type="object">
+  <Expandable title="properties">
+    <ResponseField name="detail" type="array">
+      Array of validation errors
+      <Expandable title="Validation Error">
+        <ResponseField name="loc" type="array">
+          Location of the error
+        </ResponseField>
+        <ResponseField name="msg" type="string">
+          Error message
+        </ResponseField>
+        <ResponseField name="type" type="string">
+          Error type
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```json Request
+{
+  "url": "https://example.com",
+  "options": {
+    "max_pages": 10,
+    "max_depth": 3,
+    "timeout": 30000,
+    "scroll": true,
+    "screenshot": false,
+    "actions": [
+      {
+        "type": "scroll",
+        "duration": 1000
+      }
+    ]
+  }
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json Response Success
+{
+  "success": true,
+  "data": {
+    "pages": [
+      {
+        "url": "https://example.com",
+        "content": "Extracted content...",
+        "metadata": {
+          "depth": 0,
+          "timestamp": "2024-03-19T12:00:00Z"
+        }
+      }
+    ],
+    "metadata": {
+      "total_pages": 1,
+      "max_depth_reached": 0,
+      "duration": 1200
+    }
+  }
+}
+```
+
+```json Response Error
+{
+  "error": {
+    "detail": [
+      {
+        "loc": ["body", "options", "max_pages"],
+        "msg": "value is not a valid integer",
+        "type": "type_error.integer"
+      }
+    ]
+  }
+}
+```
+</ResponseExample>

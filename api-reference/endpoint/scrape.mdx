@@ -1,4 +1,133 @@
 ---
 title: 'Scrape'
-openapi: 'POST /plants'
+openapi: 'POST /v1/scrape'
 ---
+
+The Scrape endpoint allows you to extract structured data from a single URL with advanced options.
+
+### Authentication
+
+<ParamField header="Authorization" type="string" required>
+  Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="url" type="string" required>
+  The URL to scrape. Must be a valid URI with maximum length of 2083 characters.
+</ParamField>
+
+<ParamField body="options" type="object">
+  <Expandable title="options">
+    <ParamField body="timeout" type="integer" default="30000">
+      Timeout in milliseconds for the request
+    </ParamField>
+
+    <ParamField body="wait_for_selector" type="string">
+      CSS selector to wait for before scraping
+    </ParamField>
+
+    <ParamField body="actions" type="array">
+      List of actions to perform on the page
+      <Expandable title="Action Object">
+        <ParamField body="type" type="string" required>
+          One of: "click", "type", "wait", "scroll"
+        </ParamField>
+        
+        <ParamField body="selector" type="string">
+          CSS selector for the element to interact with
+        </ParamField>
+        
+        <ParamField body="text" type="string">
+          Text to type (for "type" action)
+        </ParamField>
+        
+        <ParamField body="duration" type="integer">
+          Duration in milliseconds (for "wait" or "scroll" actions)
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the scrape was successful
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  The scraped data from the webpage
+</ResponseField>
+
+### Error Responses
+
+<ResponseField name="error" type="object">
+  <Expandable title="properties">
+    <ResponseField name="detail" type="array">
+      Array of validation errors
+      <Expandable title="Validation Error">
+        <ResponseField name="loc" type="array">
+          Location of the error
+        </ResponseField>
+        <ResponseField name="msg" type="string">
+          Error message
+        </ResponseField>
+        <ResponseField name="type" type="string">
+          Error type
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```json Request
+{
+  "url": "https://example.com",
+  "options": {
+    "timeout": 30000,
+    "wait_for_selector": "#main-content",
+    "actions": [
+      {
+        "type": "scroll",
+        "duration": 1000
+      },
+      {
+        "type": "click",
+        "selector": ".load-more"
+      }
+    ]
+  }
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json Response Success
+{
+  "success": true,
+  "data": {
+    "url": "https://example.com",
+    "content": "Extracted content...",
+    "metadata": {
+      "timestamp": "2024-03-19T12:00:00Z"
+    }
+  }
+}
+```
+
+```json Response Error
+{
+  "error": {
+    "detail": [
+      {
+        "loc": ["body", "url"],
+        "msg": "invalid or missing URL scheme",
+        "type": "value_error.url.scheme"
+      }
+    ]
+  }
+}
+```
+</ResponseExample>
