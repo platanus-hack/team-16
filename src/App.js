@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { auth } from './firebase/config';
+import { onAuthStateChanged } from 'firebase/auth';
+import Auth from './components/Auth';
+import { ToastProvider } from "./components/ui/toast";
+// import { Toaster } from "./components/ui/toaster";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ToastProvider>
+      <div className="min-h-screen bg-gray-50">
+        {user ? (
+          <div className="p-8">
+            <h1 className="text-2xl font-bold">Bienvenido, {user.email}</h1>
+            <button
+              onClick={() => auth.signOut()}
+              className="mt-4 py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        ) : (
+          <Auth />
+        )}
+      </div>
+      {/* <Toaster /> */}
+    </ToastProvider>
   );
 }
 
