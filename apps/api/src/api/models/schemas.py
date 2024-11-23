@@ -17,16 +17,6 @@ class Action(BaseModel):
     duration: Optional[int] = None
 
 
-# class AuthConfig(BaseModel):
-#     type: str
-#     username: Optional[str] = None
-#     password: Optional[str] = None
-#     login_url: Optional[HttpUrl] = None
-#     username_selector: Optional[str] = None
-#     password_selector: Optional[str] = None
-#     submit_selector: Optional[str] = None
-
-
 class CrawlOptions(BaseModel):
     max_pages: Optional[int] = 10
     max_depth: Optional[int] = 3

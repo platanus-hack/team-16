@@ -21,7 +21,7 @@ class ScrapesterCrawler:
         """Initialize the browser instance"""
         self.playwright = await async_playwright().start()
         self.browser = await self.playwright.chromium.launch(
-            headless=False, args=["--no-sandbox", "--disable-setuid-sandbox"]
+            headless=True, args=["--no-sandbox", "--disable-setuid-sandbox"]
         )
         self.context = await self.browser.new_context(
             viewport={"width": 1920, "height": 1080},
@@ -156,11 +156,6 @@ class ScrapesterCrawler:
             # Configure page
             if options.get("timeout"):
                 page.set_default_timeout(options["timeout"])
-
-            # Handle authentication if needed
-            if options.get("auth"):
-                await self.handle_authentication(page, options["auth"])
-
             # Navigate to page
             response = await page.goto(url, wait_until="networkidle")
             if not response.ok:
@@ -215,24 +210,6 @@ class ScrapesterCrawler:
             except Exception as e:
                 logger.error(f"Error executing action {action_type}: {e}")
                 raise
-
-    async def handle_authentication(self, page: Page, auth_config: Dict):
-        """Handle different authentication methods"""
-        auth_type = auth_config.get("type")
-
-        if auth_type == "basic":
-            await self.context.setHTTPCredentials(
-                {
-                    "username": auth_config["username"],
-                    "password": auth_config["password"],
-                }
-            )
-        elif auth_type == "form":
-            await page.goto(auth_config["login_url"])
-            await page.type(auth_config["username_selector"], auth_config["username"])
-            await page.type(auth_config["password_selector"], auth_config["password"])
-            await page.click(auth_config["submit_selector"])
-            await page.wait_for_load_state("networkidle")
 
     async def crawl_website(self, start_url: str, options: Dict = None) -> List[Dict]:
         """Crawl an entire website with advanced options"""
