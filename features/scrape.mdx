@@ -15,6 +15,62 @@ Scapester converts web pages into clean, structured formats ideal for data proce
 
 ### Installation
 
+<CodeGroup>
+```bash npm
+npm install scapester
+```
+
+```bash pip
+pip install scapester-py
+```
+</CodeGroup>
+
+### Usage
+
+<CodeGroup>
+```javascript Node
+import { ScapesterApp } from 'scapester';
+
+const app = new ScapesterApp('sk-YOUR_API_KEY');
+
+// Scrape a website
+const result = await app.scrapeUrl('example.com', {
+    formats: ['markdown', 'html']
+});
+console.log(result);
+```
+
+```python Python
+from scapester import ScapesterApp
+
+app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+
+# Scrape a website
+result = app.scrape_url(
+    'example.com',
+    params={'formats': ['markdown', 'html']}
+)
+print(result)
+```
+</CodeGroup>
+
+### Response Format
+
+```json
+{
+  "success": true,
+  "data": {
+    "markdown": "# Welcome to Example\nThis is the main content...",
+    "html": "<!DOCTYPE html><html><body>...</body></html>",
+    "metadata": {
+      "title": "Example Website",
+      "description": "An example website description",
+      "language": "en",
+      "sourceURL": "https://example.com",
+      "statusCode": 200
+    }
+  }
+}
 ```
 
 ## Extraction Without Schema
@@ -35,7 +91,7 @@ curl -X POST https://api.scapester.com/v1/scrape \
     }'
 ```
 
-```python
+```python Python
 from scapester import ScapesterApp
 
 app = ScapesterApp(api_key="sk-YOUR_API_KEY")
@@ -49,7 +105,7 @@ result = app.scrape_url('example.com', {
 print(result['extract'])
 ```
 
-```javascript
+```javascript Node
 const app = new ScapesterApp('sk-YOUR_API_KEY');
 
 const result = await app.scrapeUrl('example.com', {
@@ -69,7 +125,7 @@ console.log(result.extract);
 Capture visual snapshots of web pages:
 
 <CodeGroup>
-```python
+```python Python
 result = app.scrape_url('example.com', 
     params={
         'formats': ['screenshot'],
@@ -82,7 +138,7 @@ result = app.scrape_url('example.com',
 )
 ```
 
-```javascript
+```javascript Node
 const result = await app.scrapeUrl('example.com', {
     formats: ['screenshot'],
     screenshot: {
@@ -99,7 +155,7 @@ const result = await app.scrapeUrl('example.com', {
 Add authentication or custom headers to your requests:
 
 <CodeGroup>
-```python
+```python Python
 result = app.scrape_url('example.com', 
     params={
         'formats': ['markdown'],
@@ -111,41 +167,13 @@ result = app.scrape_url('example.com',
 )
 ```
 
-```javascript
+```javascript Node
 const result = await app.scrapeUrl('example.com', {
     formats: ['markdown'],
     headers: {
         'Authorization': 'Bearer token123',
         'Cookie': 'session=abc123'
     }
-});
-```
-</CodeGroup>
-
-### Wait for Selectors
-
-Wait for specific elements to appear before scraping:
-
-<CodeGroup>
-```python
-result = app.scrape_url('example.com', 
-    params={
-        'formats': ['markdown'],
-        'actions': [
-            {"type": "waitForSelector", "selector": "#dynamic-content"},
-            {"type": "scrape"}
-        ]
-    }
-)
-```
-
-```javascript
-const result = await app.scrapeUrl('example.com', {
-    formats: ['markdown'],
-    actions: [
-        {type: "waitForSelector", selector: "#dynamic-content"},
-        {type: "scrape"}
-    ]
 });
 ```
 </CodeGroup>
@@ -182,4 +210,4 @@ Common error codes include:
 4. **Cache Results**: Store and reuse results when possible
 5. **Respect Robots.txt**: Check if scraping is allowed for the target URL
 
-For more details about available parameters and options, refer to our [API Reference](/api-reference)
+For more details about available parameters and options, refer to our [API Reference](/api-reference).
