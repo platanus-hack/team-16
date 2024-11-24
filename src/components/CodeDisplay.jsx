@@ -79,9 +79,9 @@ export function CodeDisplay({ user }) {
 
   const handleTryItClick = () => {
     if (user) {
-      window.open('https://www.scrapester.lol/playground', '_blank')
+      navigate('/playground');
     } else {
-      navigate('/login')
+      navigate('/login');
     }
   }
 

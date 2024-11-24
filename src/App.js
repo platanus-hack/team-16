@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
 import { auth } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import Auth from './components/Auth';
@@ -20,6 +20,7 @@ import Home from './pages/Home';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -38,6 +39,16 @@ function App() {
       .map((n) => n[0])
       .join("")
       .toUpperCase();
+  };
+
+  // Update playground navigation to use relative paths
+  const handlePlaygroundClick = (e) => {
+    e.preventDefault();
+    if (!user) {
+      navigate('/login');
+    } else {
+      navigate('/playground');
+    }
   };
 
   return (
@@ -60,12 +71,13 @@ function App() {
                 </Link>
 
                 <div className="flex items-center gap-8">
-                  <Link 
-                    to="/playground" 
+                  <a 
+                    href="#"
+                    onClick={handlePlaygroundClick}
                     className="hidden sm:block text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Playground
-                  </Link>
+                  </a>
 
                   <a
                     href="https://docs.scrapester.lol/quickstart"
