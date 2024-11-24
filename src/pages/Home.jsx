@@ -41,9 +41,9 @@ export default function Home() {
       
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 container mx-auto px-4 py-8 md:py-16 space-y-16">
+      <main className="flex-1 space-y-16">
         {/* Hero Section */}
-        <header className="text-center space-y-6">
+        <header className="container mx-auto px-4 py-8 md:py-16 text-center space-y-6">
           <div className="flex justify-center">
             <img
               className="dark:invert "
@@ -76,7 +76,7 @@ export default function Home() {
         </header>
 
         {/* Features Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
+        <section className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Zap className="h-12 w-12 text-[#574a90] mb-4" />
             <h3 className="text-xl font-semibold mb-2">Minimize Tokens</h3>
@@ -100,19 +100,17 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* Integration Section - Fixed width issue */}
-        <section className="relative py-24 overflow-hidden w-full">
-          <div className="absolute inset-0 w-full bg-gradient-to-br from-purple-700 via-blue-800 to-indigo-900">
-            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M0 40L40 0M0 0L40 40" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </div>
-          <div className="container relative px-4 z-10">
+        {/* Integration Section - Full width */}
+        <section className="relative py-24 overflow-hidden bg-gradient-to-br from-purple-700 via-blue-800 to-indigo-900">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M0 40L40 0M0 0L40 40" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+          <div className="container relative mx-auto px-4 z-10">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
                 Integrate today
