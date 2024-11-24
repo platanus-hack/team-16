@@ -58,8 +58,8 @@ export default function PlaygroundPage() {
 
   const handleTabChange = (value) => {
     setActiveTab(value);
-    setScrapeResults(null);
-    setCrawlResults(null);
+    // setScrapeResults(null);
+    // setCrawlResults(null);
   };
 
   const validateUrl = (url) => {
@@ -138,8 +138,6 @@ export default function PlaygroundPage() {
           },
         }),
       });
-
-      alert(Number(crawlerOptions.max_pages))
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
