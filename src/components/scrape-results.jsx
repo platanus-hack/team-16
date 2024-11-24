@@ -4,10 +4,21 @@ import { Download, Copy } from 'lucide-react'
 import { Button } from '../components/ui/button'
 import { Card, CardContent } from '../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
+import ReactMarkdown from 'react-markdown'
 
 export function ScrapeResults({ data }) {
+  const responseData = data.data;
+
+  // Crear objeto JSON formateado para mostrar
+  const jsonData = {
+    url: responseData.url,
+    markdown: responseData.markdown,
+    metadata: responseData.metadata,
+    timestamp: responseData.timestamp
+  }
+
   const handleDownload = () => {
-    const blob = new Blob([JSON.stringify(data.json, null, 2)], { type: 'application/json' })
+    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -45,14 +56,16 @@ export function ScrapeResults({ data }) {
             </TabsList>
             <TabsContent value="markdown">
               <div className="relative">
-                <pre className="bg-secondary p-4 rounded-md overflow-x-auto">
-                  <code className="text-sm">{data.markdown}</code>
-                </pre>
+                <div className="bg-secondary p-4 rounded-md overflow-x-auto">
+                  <div className="prose prose-sm dark:prose-invert max-w-none max-h-96">
+                    <ReactMarkdown>{responseData.markdown}</ReactMarkdown>
+                  </div>
+                </div>
                 <Button
                   variant="ghost"
                   size="sm"
                   className="absolute top-2 right-2"
-                  onClick={() => handleCopy(data.markdown)}
+                  onClick={() => handleCopy(responseData.markdown)}
                 >
                   <Copy className="h-4 w-4" />
                 </Button>
@@ -61,13 +74,15 @@ export function ScrapeResults({ data }) {
             <TabsContent value="json">
               <div className="relative">
                 <pre className="bg-secondary p-4 rounded-md overflow-x-auto">
-                  <code className="text-sm">{JSON.stringify(data.json, null, 2)}</code>
+                  <code className="text-sm font-mono">
+                    {JSON.stringify(jsonData, null, 2)}
+                  </code>
                 </pre>
                 <Button
                   variant="ghost"
                   size="sm"
                   className="absolute top-2 right-2"
-                  onClick={() => handleCopy(JSON.stringify(data.json, null, 2))}
+                  onClick={() => handleCopy(JSON.stringify(jsonData, null, 2))}
                 >
                   <Copy className="h-4 w-4" />
                 </Button>

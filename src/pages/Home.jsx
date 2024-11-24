@@ -3,9 +3,8 @@
 import { useNavigate } from 'react-router-dom';
 import { CodeDisplay } from '../components/CodeDisplay'
 
-const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
+const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database } = require('lucide-react');
 const { Button } = require('../components/ui/button');
-const { Input } = require('../components/ui/input');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
 
 const codeSnippets = {
