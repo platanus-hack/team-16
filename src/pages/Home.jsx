@@ -52,21 +52,21 @@ export default function Home() {
 
         {/* Features Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
-          <Card className="p-6 hover:shadow-lg transition-shadow">
+          <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Zap className="h-12 w-12 text-[#574a90] mb-4" />
             <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
             <p className="text-muted-foreground">
               Blazing fast performance with concurrent scraping and automatic rate limiting.
             </p>
           </Card>
-          <Card className="p-6 hover:shadow-lg transition-shadow">
+          <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Shield className="h-12 w-12 text-[#574a90] mb-4" />
             <h3 className="text-xl font-semibold mb-2">Built-in Protection</h3>
             <p className="text-muted-foreground">
               Automatic proxy rotation and user-agent switching to avoid blocks.
             </p>
           </Card>
-          <Card className="p-6 hover:shadow-lg transition-shadow">
+          <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Code className="h-12 w-12 text-[#574a90] mb-4" />
             <h3 className="text-xl font-semibold mb-2">Simple API</h3>
             <p className="text-muted-foreground">
