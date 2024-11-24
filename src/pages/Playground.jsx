@@ -14,20 +14,8 @@ import { Button } from '../components/ui/button';
 import { ScrapeResults } from '../components/scrape-results';
 import { EmptyState } from '../components/common-options';
 
-// Mock data
+// Mock data solo para crawl
 const mockResults = {
-  scrape: {
-    content: `# Find Bugs Before Your Users Do...`,
-    markdown: `# Find Bugs Before Your Users Do...`,
-    json: {
-      title: "Find Bugs Before Your Users Do",
-      description: "Automated end-to-end testing powered by AI...",
-      links: [
-        { text: "Docs", url: "https://docs.scapester.app/introduction/scapester-sdk" },
-        { text: "Pricing", url: "https://scapester.dev/pricing/" },
-      ]
-    }
-  },
   crawl: {
     totalPages: 2,
     pages: [
@@ -60,23 +48,20 @@ const mockResults = {
 };
 
 function isValidUrl(url) {
-  // Basic URL pattern: optional www, required domain, valid TLD
-  const urlPattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/;
+    // Si la URL está vacía
+    if (!url) return false;
   
-  // First check if it matches our basic pattern
-  if (!urlPattern.test(url)) {
-    return false;
+    try {
+      // Agregar https:// si no tiene protocolo
+      const urlToCheck = url.startsWith('http') ? url : `https://${url}`;
+      const urlObject = new URL(urlToCheck);
+      
+      // Verificar que tiene un hostname válido
+      return urlObject.hostname.includes('.');
+    } catch (e) {
+      return false;
+    }
   }
-
-  // Add https if not present for URL constructor
-  const urlToCheck = url.startsWith('http') ? url : `https://${url}`;
-  try {
-    new URL(urlToCheck);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
 
 export const dynamic = 'force-dynamic'
 
@@ -92,7 +77,6 @@ export default function PlaygroundPage() {
 
   const handleTabChange = (value) => {
     setActiveTab(value);
-    // Clear results when switching tabs
     setScrapeResults(null);
     setCrawlResults(null);
   }
@@ -115,12 +99,36 @@ export default function PlaygroundPage() {
     
     setIsLoading(true);
     setScrapeResults(null);
-    // Simulate API call
-    setTimeout(() => {
+
+    try {
+      const response = await fetch('https://scrapester.bugster.app/v1/scrape', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer platanus-hack',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          url: scrapeUrl
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      
       setIsLoading(false);
-      setScrapeResults(mockResults.scrape);
-    }, 2000);
-  }
+      setScrapeResults(data);
+    } catch (error) {
+      console.error('Error:', error);
+      console.log(error);
+      
+      setIsLoading(false);
+      setUrlError('Error fetching data. Please try again.');
+    }
+  };
 
   const handleCrawl = async () => {
     if (!validateUrl(crawlUrl)) return;
@@ -146,7 +154,7 @@ export default function PlaygroundPage() {
 
   return (
     <ToastProvider>
-      <div className=" mx-20 px-4 py-8 space-y-6">
+      <div className="mx-20 px-4 py-8 space-y-6">
         <div className="space-y-2">
           <h1 className="text-2xl font-bold">Playground</h1>
           <p className="text-sm text-muted-foreground">
@@ -197,12 +205,14 @@ export default function PlaygroundPage() {
                               />
                               {urlError && <p className="text-sm text-red-500">{urlError}</p>}
                             </div>
-                            <Button 
-                              onClick={handleScrape}
-                              disabled={!scrapeUrl}
-                            >
-                              Run
-                            </Button>
+                            <Button
+                                onClick={handleScrape}
+                                disabled={!scrapeUrl}
+                                variant="outline" 
+                                className="gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors disabled:bg-gray-400 dark:disabled:bg-gray-700 disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:cursor-not-allowed"
+                                >
+                                Run
+                                </Button>
                           </div>
                         </div>
 
