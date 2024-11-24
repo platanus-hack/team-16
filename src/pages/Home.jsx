@@ -1,7 +1,8 @@
-import { Route } from 'react-router-dom';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import { useNavigate } from 'react-router-dom';
 
-const { GithubIcon, InfoIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
+const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
 const { Button } = require('../components/ui/button');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
 
