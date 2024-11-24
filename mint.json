@@ -27,7 +27,7 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://scrapester.lol/"
+    "url": "https://scrapester.lol/login"
   },
   "tabs": [
     {
@@ -43,17 +43,12 @@
     {
       "name": "Playground",
       "icon": "play",
-      "url": "https://scrapester.lol/"
+      "url": "https://scrapester.lol/login"
     },
     {
       "name": "Community",
       "icon": "slack",
       "url": "https://join.slack.com/t/bugster-workspace/shared_invite/zt-2v7i63ald-i67efG8sotKkYzTA3Kax6w"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
     }
   ],
   "navigation": [
