@@ -136,7 +136,7 @@ export default function Home() {
                 alt="Scrapester logo"
               />
               <p className="text-sm text-muted-foreground">
-                Making web scraping accessible and efficient for everyone.
+              Web Data Built for LLMs.
               </p>
             </div>
             <div>
