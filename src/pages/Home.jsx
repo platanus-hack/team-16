@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import { useNavigate } from 'react-router-dom';
-import { CodeDisplay } from '../components/CodeDisplay'
+import { CodeDisplay } from '../components/CodeDisplay';
 
 const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database } = require('lucide-react');
 const { Button } = require('../components/ui/button');
@@ -78,21 +78,35 @@ export default function Home() {
         {/* Features Grid */}
         <section className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
-            <Zap className="h-12 w-12 text-[#574a90] mb-4" />
+            <img 
+              src="/spidera.png" 
+              alt="Minimize Tokens"
+              className="h-12 w-12 mb-4"
+            />
             <h3 className="text-xl font-semibold mb-2">Minimize Tokens</h3>
             <p className="text-muted-foreground">
-              Blazing fast performance with concurrent scraping and automatic rate limiting.
+           Reduce token counts by half with Markdown. Eliminate the noise.
             </p>
           </Card>
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
-            <Shield className="h-12 w-12 text-[#574a90] mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Faster Inferences</h3>
+          <div className="flex justify-center items-center">
+            <img 
+              src="/spiderb.png" 
+              alt="Faster Inference"
+              className="h-12 w-12 mb-4"
+            />
+          </div>
+            <h3 className="text-xl font-semibold mb-2">20% Faster Inferences</h3>
             <p className="text-muted-foreground">
-              Automatic proxy rotation and user-agent switching to avoid blocks.
+             Speed up inference time by 20% with Markdown's structure.
             </p>
           </Card>
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
-            <Code className="h-12 w-12 text-[#574a90] mb-4" />
+          <img 
+              src="/spiderc.png" 
+              alt="Semantic Coherence"
+              className="h-12 w-12 mb-4"
+            />
             <h3 className="text-xl font-semibold mb-2">Semantic Coherence</h3>
             <p className="text-muted-foreground">
             Ensure that related tokens are grouped together improving your outcome.
