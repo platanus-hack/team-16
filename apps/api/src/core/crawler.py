@@ -1,4 +1,4 @@
-from playwright.async_api import async_playwright, Page
+from playwright.async_api import async_playwright, Page, TimeoutError
 import asyncio
 from typing import Dict, List, Optional, Union
 import json
@@ -21,7 +21,7 @@ class ScrapesterCrawler:
         """Initialize the browser instance"""
         self.playwright = await async_playwright().start()
         self.browser = await self.playwright.chromium.launch(
-            headless=True, args=["--no-sandbox", "--disable-setuid-sandbox"]
+            headless=False, args=["--no-sandbox", "--disable-setuid-sandbox"]
         )
         self.context = await self.browser.new_context(
             viewport={"width": 1920, "height": 1080},
@@ -157,7 +157,10 @@ class ScrapesterCrawler:
             if options.get("timeout"):
                 page.set_default_timeout(options["timeout"])
             # Navigate to page
-            response = await page.goto(url, wait_until="networkidle")
+            try:
+                response = await page.goto(url, wait_until="networkidle")
+            except TimeoutError:
+                pass
             if not response.ok:
                 raise Exception(f"Failed to load page: {response.status}")
 
