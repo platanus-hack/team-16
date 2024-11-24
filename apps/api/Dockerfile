@@ -1,7 +1,7 @@
 # Define function directory
 ARG FUNCTION_DIR="/src"
 
-FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy as build-image
+FROM mcr.microsoft.com/playwright/python:v1.49.0-jammy as build-image
 
 # Install aws-lambda-cpp build dependencies
 RUN apt-get update && \
@@ -26,8 +26,7 @@ RUN pip3 install playwright
 RUN playwright install
 
 # Multi-stage build: grab a fresh copy of the base image
-FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
-
+FROM mcr.microsoft.com/playwright/python:v1.49.0-jammy
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
 # Set working directory to function root directory
@@ -38,4 +37,4 @@ COPY --from=build-image ${FUNCTION_DIR} ${FUNCTION_DIR}
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "uvicorn","src.main:app", "--host","0.0.0.0", "--port", "80" ]
+CMD [ "uvicorn","main:app", "--host","0.0.0.0", "--port", "80" ]
