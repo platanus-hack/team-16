@@ -1,5 +1,7 @@
 # Scrapester - Simplified Web Scraping
 
+Test our deployed project [here](https://www.scrapester.lol)
+
 ## 🚀 Transforming Web Data into Digital Gold
 
 Transform websites into clean and structured data for your AI applications. Open source and developer-friendly.
