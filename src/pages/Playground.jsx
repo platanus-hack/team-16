@@ -25,17 +25,17 @@ import { EmptyState } from "../components/common-options";
 import { Label } from "../components/ui/label";
 import { Checkbox } from "../components/ui/checkbox";
 
-function isValidUrl(url) {
-  if (!url) return false;
+// function isValidUrl(url) {
+//   if (!url) return false;
 
-  try {
-    const urlObject = new URL(url);
-    return (urlObject.protocol === 'http:' || urlObject.protocol === 'https:') && 
-           urlObject.hostname.includes('.');
-  } catch (e) {
-    return false;
-  }
-}
+//   try {
+//     const urlObject = new URL(url);
+//     return (urlObject.protocol === 'http:' || urlObject.protocol === 'https:') && 
+//            urlObject.hostname.includes('.');
+//   } catch (e) {
+//     return false;
+//   }
+// }
 
 export const dynamic = "force-dynamic";
 
