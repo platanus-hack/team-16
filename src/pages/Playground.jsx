@@ -100,11 +100,17 @@ export default function PlaygroundPage() {
         })
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Si la respuesta no es ok, creamos un objeto de error con el formato esperado
+        setScrapeResults({
+          detail: data.detail || `Error scraping page: ${response.status} - ${response.statusText}`
+        });
+        setIsLoading(false);
+        return;
       }
 
-      const data = await response.json();
       console.log("Scrape response:", data);
 
       setIsLoading(false);
@@ -112,7 +118,10 @@ export default function PlaygroundPage() {
     } catch (error) {
       console.error("Error:", error);
       setIsLoading(false);
-      setUrlError("Error fetching data. Please try again.");
+      // En caso de error de red o cualquier otro error, creamos un objeto de error
+      setScrapeResults({
+        detail: error.message || "Error fetching data. Please try again."
+      });
     }
 };
 
@@ -406,8 +415,12 @@ export default function PlaygroundPage() {
               </div>
 
               <div className="space-y-6">
-                {activeTab === "scrape" && scrapeResults && (<ScrapeResults data={scrapeResults} />
-                )}
+              {activeTab === "scrape" && scrapeResults && (
+  <ScrapeResults 
+    data={scrapeResults} 
+    onRetry={handleScrape}
+  />
+)}
                 {activeTab === "crawl" && crawlResults && (
                   <CrawlResults 
                     data={crawlResults} 
