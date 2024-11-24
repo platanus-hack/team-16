@@ -60,13 +60,13 @@ export default function Home() {
            Transform websites into clean and structured data for your AI applications. Open source and developer-friendly.
           </p>
           <div className="flex justify-center gap-4 pt-4">
-          <Button size="lg" className="gap-2" onClick={handleGetStarted}>
+          <Button size="lg" className="gap-2 bg-[#574a90] hover:bg-[#5d518f]" onClick={handleGetStarted}>
               <Terminal className="h-4 w-4" />
               Get Started
             </Button>
             <Button 
               size="lg" 
-              variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors"
+              variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#7265a9] hover:text-white transition-colors"
               onClick={() => window.open('https://github.com/Bugsterapp/scrapester', '_blank')}
             >
               <GithubIcon className="h-4 w-4" />
