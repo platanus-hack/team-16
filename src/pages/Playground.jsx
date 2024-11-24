@@ -29,9 +29,9 @@ function isValidUrl(url) {
   if (!url) return false;
 
   try {
-    const urlToCheck = url.startsWith("http") ? url : `https://${url}`;
-    const urlObject = new URL(urlToCheck);
-    return urlObject.hostname.includes(".");
+    const urlObject = new URL(url);
+    return (urlObject.protocol === 'http:' || urlObject.protocol === 'https:') && 
+           urlObject.hostname.includes('.');
   } catch (e) {
     return false;
   }
@@ -58,8 +58,6 @@ export default function PlaygroundPage() {
 
   const handleTabChange = (value) => {
     setActiveTab(value);
-    // setScrapeResults(null);
-    // setCrawlResults(null);
   };
 
   const validateUrl = (url) => {
@@ -67,12 +65,22 @@ export default function PlaygroundPage() {
       setUrlError("Enter a URL to get started");
       return false;
     }
-    if (!isValidUrl(url)) {
-      setUrlError("Please enter a valid website URL (e.g., example.com)");
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      setUrlError("URL must start with http:// or https://");
       return false;
     }
-    setUrlError("");
-    return true;
+    if (!url.split('://')[1]?.includes('.')) {
+      setUrlError("Please enter a valid domain");
+      return false;
+    }
+    try {
+      new URL(url);
+      setUrlError("");
+      return true;
+    } catch {
+      setUrlError("Please enter a valid URL");
+      return false;
+    }
   };
 
   const handleCrawlerOptionChange = (key, value) => {
@@ -80,6 +88,29 @@ export default function PlaygroundPage() {
       ...prev,
       [key]: value
     }));
+  };
+
+  const handleUrlChange = (e, type) => {
+    let value = e.target.value.trim();
+    
+    if (value) {
+      // Validar protocolo en tiempo real
+      if (!value.startsWith('http://') && !value.startsWith('https://')) {
+        setUrlError("URL must start with http:// or https://");
+      } else if (!value.split('://')[1]?.includes('.')) {
+        setUrlError("Please enter a valid domain");
+      } else {
+        setUrlError("");
+      }
+    } else {
+      setUrlError("");
+    }
+    
+    if (type === "scrape") {
+      setScrapeUrl(value);
+    } else {
+      setCrawlUrl(value);
+    }
   };
 
   const handleScrape = async () => {
@@ -103,27 +134,27 @@ export default function PlaygroundPage() {
       const data = await response.json();
       
       if (!response.ok) {
-        // Si la respuesta no es ok, creamos un objeto de error con el formato esperado
+        const errorMessage = typeof data.detail === 'object' 
+          ? JSON.stringify(data.detail) 
+          : data.detail || `Error scraping page: ${response.status}`;
+          
         setScrapeResults({
-          detail: data.detail || `Error scraping page: ${response.status} - ${response.statusText}`
+          detail: errorMessage
         });
         setIsLoading(false);
         return;
       }
-
-      console.log("Scrape response:", data);
 
       setIsLoading(false);
       setScrapeResults(data);
     } catch (error) {
       console.error("Error:", error);
       setIsLoading(false);
-      // En caso de error de red o cualquier otro error, creamos un objeto de error
       setScrapeResults({
-        detail: error.message || "Error fetching data. Please try again."
+        detail: "Error fetching data. Please try again."
       });
     }
-};
+  };
 
   const handleCrawl = async () => {
     if (!validateUrl(crawlUrl)) return;
@@ -148,32 +179,31 @@ export default function PlaygroundPage() {
         }),
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorMessage = typeof data.detail === 'object' 
+          ? JSON.stringify(data.detail) 
+          : data.detail || `Error crawling pages: ${response.status}`;
+          
+        setCrawlResults({
+          detail: errorMessage
+        });
+        setIsLoading(false);
+        return;
       }
 
-      const data = await response.json();
       console.log("Crawl response:", data);
 
       setIsLoading(false);
-      setCrawlResults(data)
+      setCrawlResults(data);
     } catch (error) {
       console.error("Error:", error);
-      console.log(error);
-
       setIsLoading(false);
-      setUrlError("Error fetching data. Please try again.");
+      setCrawlResults({
+        detail: "Error fetching data. Please try again."
+      });
     }
-  };
-
-  const handleUrlChange = (e, type) => {
-    const value = e.target.value;
-    if (type === "scrape") {
-      setScrapeUrl(value);
-    } else {
-      setCrawlUrl(value);
-    }
-    setUrlError("");
   };
 
   return (
@@ -393,8 +423,7 @@ export default function PlaygroundPage() {
 
                                 <div className="space-y-2">
                                   <Label htmlFor="timeout">
-                                    Timeout (in ms)
-                                  </Label>
+                                    Timeout (in ms)</Label>
                                   <Input
                                     id="timeout"
                                     type="number"
@@ -415,12 +444,12 @@ export default function PlaygroundPage() {
               </div>
 
               <div className="space-y-6">
-              {activeTab === "scrape" && scrapeResults && (
-  <ScrapeResults 
-    data={scrapeResults} 
-    onRetry={handleScrape}
-  />
-)}
+                {activeTab === "scrape" && scrapeResults && (
+                  <ScrapeResults 
+                    data={scrapeResults} 
+                    onRetry={handleScrape}
+                  />
+                )}
                 {activeTab === "crawl" && crawlResults && (
                   <CrawlResults 
                     data={crawlResults} 
