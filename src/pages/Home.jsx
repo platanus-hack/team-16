@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
 const { Button } = require('../components/ui/button');
+const { Input } = require('../components/ui/input');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
 
 
@@ -29,10 +30,10 @@ export default function Home() {
             />
           </div>
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 text-transparent bg-clip-text">
-            Scrapester: Effortless Web Scraping
+          Web Data Built for LLMs
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A powerful and easy-to-use web scraping library for Node.js. Extract data from websites with minimal code and maximum efficiency.
+           Transform websites into clean and structured data for your AI applications. Open source and developer-friendly.
           </p>
           <div className="flex justify-center gap-4 pt-4">
           <Button size="lg" className="gap-2" onClick={handleGetStarted}>
@@ -42,7 +43,7 @@ export default function Home() {
             <Button 
               size="lg" 
               variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors"
-              onClick={() => window.open('https://github.com/yourusername/scrapester', '_blank')}
+              onClick={() => window.open('https://github.com/Bugsterapp/scrapester', '_blank')}
             >
               <GithubIcon className="h-4 w-4" />
               View on GitHub
@@ -54,23 +55,23 @@ export default function Home() {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Zap className="h-12 w-12 text-[#574a90] mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
+            <h3 className="text-xl font-semibold mb-2">Minimize Tokens</h3>
             <p className="text-muted-foreground">
               Blazing fast performance with concurrent scraping and automatic rate limiting.
             </p>
           </Card>
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Shield className="h-12 w-12 text-[#574a90] mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Built-in Protection</h3>
+            <h3 className="text-xl font-semibold mb-2">Faster Inferences</h3>
             <p className="text-muted-foreground">
               Automatic proxy rotation and user-agent switching to avoid blocks.
             </p>
           </Card>
           <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
             <Code className="h-12 w-12 text-[#574a90] mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Simple API</h3>
+            <h3 className="text-xl font-semibold mb-2">Semantic Coherence</h3>
             <p className="text-muted-foreground">
-              Intuitive API design that makes web scraping a breeze.
+            Ensure that related tokens are grouped together improving your outcome.
             </p>
           </Card>
         </section>
@@ -170,18 +171,18 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Documentation</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="/docs/quickstart" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     Quick Start
                   </a>
                 </li>
                 <li>
-                  <a href="/docs/api" className="text-sm text-muted-foreground hover:text-foreground">
-                    API Reference
+                  <a href="https://docs.scrapester.lol/sdks" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                    SDKs
                   </a>
                 </li>
                 <li>
-                  <a href="/docs/examples" className="text-sm text-muted-foreground hover:text-foreground">
-                    Examples
+                  <a href="https://docs.scrapester.lol/api-reference/endpoint/crawl" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                    API Reference
                   </a>
                 </li>
               </ul>
@@ -190,18 +191,18 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Community</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="https://github.com/yourusername/scrapester" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://github.com/Bugsterapp/scrapester" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a href="/discord" className="text-sm text-muted-foreground hover:text-foreground">
-                    Discord
+                  <a href="https://bugster-workspace.slack.com/join/shared_invite/zt-2v7i63ald-i67efG8sotKkYzTA3Kax6w" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                    Slack
                   </a>
                 </li>
                 <li>
-                  <a href="/twitter" className="text-sm text-muted-foreground hover:text-foreground">
-                    Twitter
+                  <a href="https://www.linkedin.com/company/bugsterapp" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
+                    LinkedIn
                   </a>
                 </li>
               </ul>
@@ -210,17 +211,7 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Support</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="/support" className="text-sm text-muted-foreground hover:text-foreground">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a href="/status" className="text-sm text-muted-foreground hover:text-foreground">
-                    Status
-                  </a>
-                </li>
-                <li>
-                  <a href="/contact" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="mailto:facundo@bugster.app" className="text-sm text-muted-foreground hover:text-foreground">
                     Contact
                   </a>
                 </li>
@@ -233,7 +224,7 @@ console.log(result.data);`}
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com/yourusername/scrapester"
+                href="https://github.com/Bugsterapp/scrapester"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground"
@@ -241,7 +232,7 @@ console.log(result.data);`}
                 <GithubIcon className="h-5 w-5" />
               </a>
               <a
-                href="https://twitter.com/scrapester"
+                href="https://www.linkedin.com/company/bugsterapp"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground"
