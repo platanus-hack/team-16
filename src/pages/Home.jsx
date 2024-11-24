@@ -170,18 +170,18 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Documentation</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="/docs/quickstart" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://docs.scrapester.lol/quickstart" className="text-sm text-muted-foreground hover:text-foreground">
                     Quick Start
                   </a>
                 </li>
                 <li>
-                  <a href="/docs/api" className="text-sm text-muted-foreground hover:text-foreground">
-                    API Reference
+                  <a href="https://docs.scrapester.lol/sdks" className="text-sm text-muted-foreground hover:text-foreground">
+                    SDKs
                   </a>
                 </li>
                 <li>
-                  <a href="/docs/examples" className="text-sm text-muted-foreground hover:text-foreground">
-                    Examples
+                  <a href="https://docs.scrapester.lol/api-reference/endpoint/crawl" className="text-sm text-muted-foreground hover:text-foreground">
+                    API Reference
                   </a>
                 </li>
               </ul>
@@ -190,18 +190,18 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Community</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="https://github.com/yourusername/scrapester" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://github.com/Bugsterapp/scrapester" className="text-sm text-muted-foreground hover:text-foreground">
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a href="/discord" className="text-sm text-muted-foreground hover:text-foreground">
-                    Discord
+                  <a href="https://bugster-workspace.slack.com/join/shared_invite/zt-2v7i63ald-i67efG8sotKkYzTA3Kax6w" className="text-sm text-muted-foreground hover:text-foreground">
+                    Slack
                   </a>
                 </li>
                 <li>
-                  <a href="/twitter" className="text-sm text-muted-foreground hover:text-foreground">
-                    Twitter
+                  <a href="https://www.linkedin.com/company/bugsterapp" className="text-sm text-muted-foreground hover:text-foreground">
+                    LinkedIn
                   </a>
                 </li>
               </ul>
@@ -210,17 +210,7 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Support</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="/support" className="text-sm text-muted-foreground hover:text-foreground">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a href="/status" className="text-sm text-muted-foreground hover:text-foreground">
-                    Status
-                  </a>
-                </li>
-                <li>
-                  <a href="/contact" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="mailto:facundo@bugster.app" className="text-sm text-muted-foreground hover:text-foreground">
                     Contact
                   </a>
                 </li>
