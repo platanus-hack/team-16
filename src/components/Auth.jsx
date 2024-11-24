@@ -13,15 +13,15 @@ const Auth = () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       toast({
-        title: "¡Bienvenido!",
-        description: `Has iniciado sesión como ${result.user.displayName || result.user.email}`,
+        title: "Welcome!",
+        description: `You are signed in as ${result.user.displayName || result.user.email}`,
         duration: 5000,
       });
     } catch (err) {
       toast({
         variant: "destructive",
-        title: "Error al iniciar sesión",
-        description: "Hubo un problema al intentar iniciar sesión con Google",
+        title: "Sign in Error",
+        description: "There was a problem signing in with Google",
         duration: 5000,
       });
       console.error(err);
@@ -29,14 +29,14 @@ const Auth = () => {
   };
 
   return (
-    <div className=" h-[700px] flex items-center justify-center bg-background p-4">
+    <div className="h-[700px] flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-4">
           <CardTitle className="text-2xl font-bold text-center">
-            Bienvenido a Scrapester
+            Welcome to Scrapester
           </CardTitle>
           <CardDescription className="text-center text-muted-foreground">
-            Inicia sesión para acceder a todas las funcionalidades de la plataforma
+            Sign in to access all features
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -69,24 +69,24 @@ const Auth = () => {
                   fill="#EA4335"
                 />
               </svg>
-              Continuar con Google
+              Continue with Google
             </Button>
             
             <div className="text-center space-y-4">
               <p className="text-sm text-muted-foreground">
-                Al iniciar sesión, aceptas nuestros 
+                By signing in, you agree to our 
                 <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
-                  términos y condiciones
+                  terms and conditions
                 </a>
               </p>
               
               <div className="flex justify-center gap-2 text-sm text-muted-foreground">
                 <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="hover:text-foreground hover:underline">
-                  Política de privacidad
+                  Privacy Policy
                 </a>
                 <span>•</span>
                 <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="hover:text-foreground hover:underline">
-                  Centro de ayuda
+                  Help Center
                 </a>
               </div>
             </div>

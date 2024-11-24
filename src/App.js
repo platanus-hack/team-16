@@ -163,7 +163,7 @@ function AppContent() {
               <Link to="/login">
                 <Button variant="outline" className="w-full gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors">
                   <svg 
-                    className="h-5 w-5 " 
+                    className="h-5 w-5" 
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -184,7 +184,7 @@ function AppContent() {
                       fill="#EA4335"
                     />
                   </svg>
-                  Iniciar Sesión
+                  Sign In
                 </Button>
               </Link>
             )}
