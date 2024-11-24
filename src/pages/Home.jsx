@@ -3,34 +3,34 @@
 import { useNavigate } from 'react-router-dom';
 import { CodeDisplay } from '../components/CodeDisplay';
 
-const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database } = require('lucide-react');
+const { GithubIcon, Globe, Terminal } = require('lucide-react');
 const { Button } = require('../components/ui/button');
-const { Card, CardContent, CardFooter } = require('../components/ui/card');
+const { Card } = require('../components/ui/card');
 
-const codeSnippets = {
-  nodejs: `import { Scrapester } from '@scrapester/sdk'
+// const codeSnippets = {
+//   nodejs: `import { Scrapester } from '@scrapester/sdk'
 
-const scraper = new Scrapester({
-  apiKey: 'your-api-key'
-})
+// const scraper = new Scrapester({
+//   apiKey: 'your-api-key'
+// })
 
-const result = await scraper.scrape({
-  url: 'https://example.com'
-})`,
-  python: `from scrapester import Scrapester
+// const result = await scraper.scrape({
+//   url: 'https://example.com'
+// })`,
+//   python: `from scrapester import Scrapester
 
-scraper = Scrapester(
-    api_key='your-api-key'
-)
+// scraper = Scrapester(
+//     api_key='your-api-key'
+// )
 
-result = scraper.scrape(
-    url='https://example.com'
-)`,
-  curl: `curl -X POST 'https://api.scrapester.com/v1/scrape' \\
-  -H 'Authorization: Bearer your-api-key' \\
-  -H 'Content-Type: application/json' \\
-  -d '{"url": "https://example.com"}'`
-}
+// result = scraper.scrape(
+//     url='https://example.com'
+// )`,
+//   curl: `curl -X POST 'https://api.scrapester.com/v1/scrape' \\
+//   -H 'Authorization: Bearer your-api-key' \\
+//   -H 'Content-Type: application/json' \\
+//   -d '{"url": "https://example.com"}'`
+// }
 
 export default function Home() {
     const navigate = useNavigate();
