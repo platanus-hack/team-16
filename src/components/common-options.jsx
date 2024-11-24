@@ -16,11 +16,6 @@ export function CommonOptions() {
           <Checkbox id="extract-main" />
           <Label htmlFor="extract-main">Extract only main content</Label>
         </div>
-        
-        <div className="flex items-center space-x-2">
-          <Checkbox id="include-html" />
-          <Label htmlFor="include-html">Include HTML content</Label>
-        </div>
 
         <div className="flex items-center space-x-2">
           <Checkbox id="include-links" />
