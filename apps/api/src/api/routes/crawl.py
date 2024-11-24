@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends
 from ..models.schemas import ScrapeRequest, CrawlRequest
-from ...core.crawler import ScrapesterCrawler
+from core.crawler import ScrapesterCrawler
 from typing import Dict, List
 import asyncio
 

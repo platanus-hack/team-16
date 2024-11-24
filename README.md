@@ -1,4 +1,7 @@
 # Scrapester
+<p align="center">
+  <img src="assets/image.png" alt="Scrapester Logo" width="200"/>
+</p>
 
 Turn any website into LLM structured data.
 

@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from .api.routes import crawl
-from .config import settings
+from fastapi.responses import JSONResponse, RedirectResponse
+from api.routes import crawl
+from config import settings
 import logging
 from contextlib import asynccontextmanager
 
@@ -43,6 +43,16 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # Include routers
 app.include_router(crawl.router, prefix="/v1", tags=["crawler"])
+
+
+@app.get("/docs", tags=["API Documentation"])
+async def docs_redirect():
+    return RedirectResponse(url="/api/v1/docs")
+
+
+@app.get("/health", tags=["Healthcheck"])
+async def health_check():
+    return {"status": "ok"}
 
 
 @app.get("/openapi.json", include_in_schema=False)

@@ -7,7 +7,7 @@ import hashlib
 from bs4 import BeautifulSoup
 import markdown
 import logging
-from ..config import settings
+from config import settings
 
 logger = logging.getLogger(__name__)
 
