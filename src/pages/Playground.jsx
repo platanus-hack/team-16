@@ -49,9 +49,9 @@ export default function PlaygroundPage() {
   const [crawlUrl, setCrawlUrl] = useState("");
   const [urlError, setUrlError] = useState("");
   const [crawlerOptions, setCrawlerOptions] = useState({
-    max_pages: 10,
+    max_pages: 4,
     max_depth: 2,
-    timeout: 1000,
+    timeout: 30000,
     extract_main: false,
     include_links: false
   });
@@ -138,6 +138,8 @@ export default function PlaygroundPage() {
           },
         }),
       });
+
+      alert(Number(crawlerOptions.max_pages))
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -332,7 +334,7 @@ export default function PlaygroundPage() {
                                   <Input
                                     id="max_pages"
                                     type="number"
-                                    placeholder="10"
+                                    placeholder="4"
                                     className="font-mono"
                                     value={crawlerOptions.max_pages}
                                     onChange={(e) => handleCrawlerOptionChange('max_pages', e.target.value)}
@@ -389,7 +391,7 @@ export default function PlaygroundPage() {
                                   <Input
                                     id="timeout"
                                     type="number"
-                                    placeholder="1000"
+                                    placeholder="30000"
                                     className="font-mono"
                                     value={crawlerOptions.timeout}
                                     onChange={(e) => handleCrawlerOptionChange('timeout', e.target.value)}

@@ -27,7 +27,7 @@ export function CrawlResults({ data }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">
-           Pages Scraped: {/*{data.stats.pages_crawled} */}
+           Pages Scraped: {data.stats.pages_crawled} 
         </h2>
         <Button 
           variant="outline"
