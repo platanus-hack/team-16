@@ -1,8 +1,8 @@
-import { Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const { GithubIcon, InfoIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
 const { Button } = require('../components/ui/button');
+const { Input } = require('../components/ui/input');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
 
 
@@ -28,10 +28,10 @@ export default function Home() {
             />
           </div>
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 text-transparent bg-clip-text">
-            Scrapester: Effortless Web Scraping
+          Web Data Built for LLMs
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A powerful and easy-to-use web scraping library for Node.js. Extract data from websites with minimal code and maximum efficiency.
+           Transform websites into clean and structured data for your AI applications. Open source and developer-friendly.
           </p>
           <div className="flex justify-center gap-4 pt-4">
           <Button size="lg" className="gap-2" onClick={handleGetStarted}>
@@ -42,7 +42,7 @@ export default function Home() {
               size="lg" 
               variant="outline" 
               className="gap-2"
-              onClick={() => window.open('https://github.com/yourusername/scrapester', '_blank')}
+              onClick={() => window.open('https://github.com/Bugsterapp/scrapester', '_blank')}
             >
               <GithubIcon className="h-4 w-4" />
               View on GitHub
@@ -54,23 +54,23 @@ export default function Home() {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
           <Card className="p-6 hover:shadow-lg transition-shadow">
             <Zap className="h-12 w-12 text-yellow-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
+            <h3 className="text-xl font-semibold mb-2">Minimize Tokens</h3>
             <p className="text-muted-foreground">
               Blazing fast performance with concurrent scraping and automatic rate limiting.
             </p>
           </Card>
           <Card className="p-6 hover:shadow-lg transition-shadow">
             <Shield className="h-12 w-12 text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Built-in Protection</h3>
+            <h3 className="text-xl font-semibold mb-2">Faster Inference</h3>
             <p className="text-muted-foreground">
               Automatic proxy rotation and user-agent switching to avoid blocks.
             </p>
           </Card>
           <Card className="p-6 hover:shadow-lg transition-shadow">
             <Code className="h-12 w-12 text-blue-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Simple API</h3>
+            <h3 className="text-xl font-semibold mb-2">Semantic Coherence</h3>
             <p className="text-muted-foreground">
-              Intuitive API design that makes web scraping a breeze.
+            Ensure that related tokens are grouped together improving your outcome.
             </p>
           </Card>
         </section>
