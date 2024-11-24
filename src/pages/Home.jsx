@@ -229,7 +229,7 @@ console.log(result.data);`}
           </div>
           <div className="border-t mt-8 pt-8 flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2024 Scrapester. All rights reserved.
+              Built with ❤️ by Bugster Inc
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -247,10 +247,6 @@ console.log(result.data);`}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <Globe className="h-5 w-5" />
-              </a>
-              <a className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2">
-                <Coffee className="h-5 w-5" />
-                Buy me a coffee
               </a>
             </div>
           </div>
