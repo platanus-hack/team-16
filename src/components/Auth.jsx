@@ -45,7 +45,7 @@ const Auth = () => {
               type="button"
               variant="outline"
               onClick={handleGoogleSignIn}
-              className="w-full h-12 text-base hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="w-full h-12 text-base hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors"
             >
               <svg 
                 className="mr-3 h-6 w-6 left-4" 
@@ -75,17 +75,17 @@ const Auth = () => {
             <div className="text-center space-y-4">
               <p className="text-sm text-muted-foreground">
                 Al iniciar sesión, aceptas nuestros 
-                <a href="/terms" className="text-primary hover:underline ml-1">
+                <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
                   términos y condiciones
                 </a>
               </p>
               
               <div className="flex justify-center gap-2 text-sm text-muted-foreground">
-                <a href="/privacy" className="hover:text-foreground hover:underline">
+                <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="hover:text-foreground hover:underline">
                   Política de privacidad
                 </a>
                 <span>•</span>
-                <a href="/help" className="hover:text-foreground hover:underline">
+                <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="hover:text-foreground hover:underline">
                   Centro de ayuda
                 </a>
               </div>

@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import { useNavigate } from 'react-router-dom';
 
-const { GithubIcon, InfoIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
+const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
 const { Button } = require('../components/ui/button');
 const { Input } = require('../components/ui/input');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
@@ -40,8 +42,7 @@ export default function Home() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="gap-2"
+              variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors"
               onClick={() => window.open('https://github.com/Bugsterapp/scrapester', '_blank')}
             >
               <GithubIcon className="h-4 w-4" />
@@ -52,22 +53,22 @@ export default function Home() {
 
         {/* Features Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <Zap className="h-12 w-12 text-yellow-500 mb-4" />
+          <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
+            <Zap className="h-12 w-12 text-[#574a90] mb-4" />
             <h3 className="text-xl font-semibold mb-2">Minimize Tokens</h3>
             <p className="text-muted-foreground">
               Blazing fast performance with concurrent scraping and automatic rate limiting.
             </p>
           </Card>
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <Shield className="h-12 w-12 text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Faster Inference</h3>
+          <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
+            <Shield className="h-12 w-12 text-[#574a90] mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Faster Inferences</h3>
             <p className="text-muted-foreground">
               Automatic proxy rotation and user-agent switching to avoid blocks.
             </p>
           </Card>
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <Code className="h-12 w-12 text-blue-500 mb-4" />
+          <Card className="p-6 hover:shadow-lg hover:shadow-[#574a90] transition-shadow">
+            <Code className="h-12 w-12 text-[#574a90] mb-4" />
             <h3 className="text-xl font-semibold mb-2">Semantic Coherence</h3>
             <p className="text-muted-foreground">
             Ensure that related tokens are grouped together improving your outcome.
@@ -123,7 +124,7 @@ console.log(result.data);`}
                 Get Started
               </a>
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors" asChild>
               <a href="https://docs.scrapester.lol" target="_blank" rel="noopener noreferrer" className="gap-2">
                 <Database className="h-4 w-4" />
                 Read our docs
@@ -229,7 +230,7 @@ console.log(result.data);`}
           </div>
           <div className="border-t mt-8 pt-8 flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2024 Scrapester. All rights reserved.
+              Built with ❤️ by Bugster Inc
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -247,10 +248,6 @@ console.log(result.data);`}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <Globe className="h-5 w-5" />
-              </a>
-              <a className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2">
-                <Coffee className="h-5 w-5" />
-                Buy me a coffee
               </a>
             </div>
           </div>

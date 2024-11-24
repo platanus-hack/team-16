@@ -98,9 +98,14 @@ function App() {
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <Link to="/settings" className="w-full cursor-pointer">
-                            Configuración
-                          </Link>
+                        <a 
+                          href="https://docs.scrapester.lol/quickstart" 
+                          className="w-full cursor-pointer"
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          Docs
+                        </a>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem 
@@ -114,9 +119,9 @@ function App() {
                   </>
                 ) : (
                   <Link to="/login">
-                    <Button variant="default" className="gap-2">
+                    <Button variant="outline" className="w-full gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors">
                       <svg 
-                        className="h-5 w-5" 
+                        className="h-5 w-5 " 
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                       >
