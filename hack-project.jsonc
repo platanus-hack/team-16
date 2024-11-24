@@ -1,0 +1,10 @@
+{ 
+    // nombre de su producto / solución
+    "project_name": "Scrapester",
+    // descripción de una frase y directa al grano de la solución
+    "oneliner": "Transform websites into clean and structured data for your AI applications. Open source and developer-friendly.",
+    // url al logo de proyecto. mínimo 200x200, png. puede estar hosteado en el mismo repo.
+    "logo_url": "https://github.com/Bugsterapp/scrapester-saas/blob/master/public/LOGO.png",
+    // url para acceder a su app. si es apk u otro, link de descarga directa.
+    "app_url": "https://www.scrapester.lol/"
+}
