@@ -98,9 +98,14 @@ function App() {
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <Link to="/settings" className="w-full cursor-pointer">
-                            Configuración
-                          </Link>
+                        <a 
+                          href="https://docs.scrapester.lol/quickstart" 
+                          className="w-full cursor-pointer"
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          Docs
+                        </a>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem 

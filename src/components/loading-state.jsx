@@ -24,7 +24,7 @@ export function LoadingState() {
           alt="Scapester Logo"
           width={160}
           height={160}
-          className="rounded-xl bg-red-950"
+          className="rounded-xl"
         />
       </div>
       <p className="text-3xl font-medium">
