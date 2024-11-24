@@ -40,8 +40,7 @@ export default function Home() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="gap-2"
+              variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors"
               onClick={() => window.open('https://github.com/yourusername/scrapester', '_blank')}
             >
               <GithubIcon className="h-4 w-4" />
@@ -123,7 +122,7 @@ console.log(result.data);`}
                 Get Started
               </a>
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors" asChild>
               <a href="https://docs.scrapester.lol" target="_blank" rel="noopener noreferrer" className="gap-2">
                 <Database className="h-4 w-4" />
                 Read our docs
