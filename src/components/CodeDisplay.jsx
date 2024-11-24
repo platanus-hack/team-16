@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter } from "./ui/card"
 
 import { Database, Terminal } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const codeSnippets = {
   nodejs: `import { ScrapesterApp } from 'scrapester';
@@ -42,7 +43,7 @@ client = ScrapesterApp(api_key="your-api-key")
 
 # Scrape a single URL
 try:
-    url = "https://platan.us/"
+    url = "https://example.com"
     result = client.crawl(url)
     print(f"Title: {result.metadata.get('title')}")
     print(f"Content:\\n{result.markdown}")
@@ -51,21 +52,38 @@ except APIError as e:
 
 # Crawl a website
 try:
-    url = "https://platan.us/"
-    result = client.crawl(url)
-    print(f"{result}")
+    results = client.crawl("https://example.com", max_pages=10, max_depth=2)
+    for result in results:
+        print(f"URL: {result.url}")
+        print(f"Content: {result.markdown[:100]}...")  # Show first 100 chars
 except APIError as e:
     print(f"Error: {e}")`,
-  curl: `curl -X POST https://scrapester.bugster.app/v1/scrape \\
-  -H "Authorization: Bearer platanus-hack" \\
+  curl: `# Scrape a single URL
+curl -X POST https://api.scrapester.com/v1/scrape \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "url": "https://platan.us/"
-  }'`
+    "url": "https://example.com"
+  }'
+
+# Response will contain the scraped content in Markdown format
+# ...
+
+# For crawling, use the /crawl endpoint with additional parameters
+# ...`
 }
 
-export function CodeDisplay() {
+export function CodeDisplay({ user }) {
   const [selectedLanguage, setSelectedLanguage] = useState('nodejs')
+  const navigate = useNavigate()
+
+  const handleTryItClick = () => {
+    if (user) {
+      window.open('https://www.scrapester.lol/playground', '_blank')
+    } else {
+      navigate('/login')
+    }
+  }
 
   return (
     <Card className="bg-gray-900 border-gray-700">
@@ -94,8 +112,20 @@ export function CodeDisplay() {
           </Button>
         </div>
         <pre className="bg-gray-950 rounded-lg p-4 overflow-x-auto">
-          <code className="text-sm text-white">
-            {codeSnippets[selectedLanguage]}
+          <code className="text-sm">
+            {codeSnippets[selectedLanguage].split('\n').map((line, index) => {
+              if (line.trim().startsWith('import') || line.trim().startsWith('from')) {
+                return <span key={index} className="block text-purple-400">{line}</span>;
+              } else if (line.trim().startsWith('//') || line.trim().startsWith('#')) {
+                return <span key={index} className="block text-green-400">{line}</span>;
+              } else if (line.includes('try') || line.includes('catch') || line.includes('except')) {
+                return <span key={index} className="block text-yellow-300">{line}</span>;
+              } else if (line.includes('console.log') || line.includes('print')) {
+                return <span key={index} className="block text-blue-300">{line}</span>;
+              } else {
+                return <span key={index} className="block text-gray-300">{line}</span>;
+              }
+            })}
           </code>
         </pre>
       </CardContent>
@@ -107,9 +137,7 @@ export function CodeDisplay() {
           <Database className="mr-2 h-4 w-4" />
           View Documentation
         </Button>
-        <Button
-          onClick={() => window.open('https://www.scrapester.lol/playground', '_blank')}
-        >
+        <Button onClick={handleTryItClick}>
           <Terminal className="mr-2 h-4 w-4" />
           Try it out
         </Button>
