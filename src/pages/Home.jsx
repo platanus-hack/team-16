@@ -170,17 +170,17 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Documentation</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="https://docs.scrapester.lol/quickstart" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     Quick Start
                   </a>
                 </li>
                 <li>
-                  <a href="https://docs.scrapester.lol/sdks" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://docs.scrapester.lol/sdks" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     SDKs
                   </a>
                 </li>
                 <li>
-                  <a href="https://docs.scrapester.lol/api-reference/endpoint/crawl" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://docs.scrapester.lol/api-reference/endpoint/crawl" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     API Reference
                   </a>
                 </li>
@@ -190,17 +190,17 @@ console.log(result.data);`}
               <h5 className="font-semibold mb-4">Community</h5>
               <ul className="space-y-2">
                 <li>
-                  <a href="https://github.com/Bugsterapp/scrapester" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://github.com/Bugsterapp/scrapester" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a href="https://bugster-workspace.slack.com/join/shared_invite/zt-2v7i63ald-i67efG8sotKkYzTA3Kax6w" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://bugster-workspace.slack.com/join/shared_invite/zt-2v7i63ald-i67efG8sotKkYzTA3Kax6w" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     Slack
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/company/bugsterapp" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://www.linkedin.com/company/bugsterapp" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
                     LinkedIn
                   </a>
                 </li>
@@ -223,7 +223,7 @@ console.log(result.data);`}
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com/yourusername/scrapester"
+                href="https://github.com/Bugsterapp/scrapester"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground"
@@ -231,7 +231,7 @@ console.log(result.data);`}
                 <GithubIcon className="h-5 w-5" />
               </a>
               <a
-                href="https://twitter.com/scrapester"
+                href="https://www.linkedin.com/company/bugsterapp"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground"
