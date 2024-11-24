@@ -1,12 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import { useNavigate } from 'react-router-dom';
+import { CodeDisplay } from '../components/CodeDisplay'
 
 const { GithubIcon, Globe, Terminal, Zap, Shield, Code, Database, Coffee } = require('lucide-react');
 const { Button } = require('../components/ui/button');
 const { Input } = require('../components/ui/input');
 const { Card, CardContent, CardFooter } = require('../components/ui/card');
 
+const codeSnippets = {
+  nodejs: `import { Scrapester } from '@scrapester/sdk'
+
+const scraper = new Scrapester({
+  apiKey: 'your-api-key'
+})
+
+const result = await scraper.scrape({
+  url: 'https://example.com'
+})`,
+  python: `from scrapester import Scrapester
+
+scraper = Scrapester(
+    api_key='your-api-key'
+)
+
+result = scraper.scrape(
+    url='https://example.com'
+)`,
+  curl: `curl -X POST 'https://api.scrapester.com/v1/scrape' \\
+  -H 'Authorization: Bearer your-api-key' \\
+  -H 'Content-Type: application/json' \\
+  -d '{"url": "https://example.com"}'`
+}
 
 export default function Home() {
     const navigate = useNavigate();
@@ -76,80 +101,28 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* Code Example */}
-        <Card className="max-w-3xl mx-auto">
-          <CardContent className="space-y-6 pt-6">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold">Quick Start</h2>
-                <code className="relative rounded bg-muted px-4 py-1 font-mono text-sm">
-                  npm install scrapester
-                </code>
-              </div>
+        {/* Integration Section - Fixed width issue */}
+        <section className="relative py-24 overflow-hidden w-full">
+          <div className="absolute inset-0 w-full bg-gradient-to-br from-purple-700 via-blue-800 to-indigo-900">
+            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M0 40L40 0M0 0L40 40" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+          </div>
+          <div className="container relative px-4 z-10">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
+                Integrate today
+              </h2>
+              <p className="mx-auto max-w-[600px] text-gray-200">
+                Enhance your applications with top-tier web scraping and crawling capabilities.
+              </p>
             </div>
-            <div className="space-y-2">
-              <h3 className="text-xl font-semibold flex items-center gap-2">
-                <Terminal className="h-5 w-5" />
-                Example Usage
-              </h3>
-              <pre className="rounded-lg bg-gray-900 text-gray-100 p-4 overflow-x-auto">
-                <code className="font-mono text-sm">
-                  {`import { Scrapester } from 'scrapester';
-
-// Initialize the scraper with options
-const scraper = new Scrapester({
-  concurrency: 2,
-  timeout: 30000
-});
-
-// Start scraping with advanced features
-const result = await scraper.get('https://example.com', {
-  waitFor: '.content',
-  extract: {
-    title: 'h1',
-    prices: '.price | numbers[]',
-    images: 'img | attr:src[]'
-  }
-});
-
-console.log(result.data);`}
-                </code>
-              </pre>
-            </div>
-          </CardContent>
-          <CardFooter className="flex justify-center gap-4 pt-6">
-            <Button asChild onClick={handleGetStarted}>
-              <a href="https://docs.scrapester.lol/quickstart" target="_blank" rel="noopener noreferrer" className="gap-2">
-                <Code className="h-4 w-4" />
-                Get Started
-              </a>
-            </Button>
-            <Button variant="outline" className=" gap-2 text-sm hover:bg-[#574a90] dark:hover:bg-[#574a90] hover:text-white transition-colors" asChild>
-              <a href="https://docs.scrapester.lol" target="_blank" rel="noopener noreferrer" className="gap-2">
-                <Database className="h-4 w-4" />
-                Read our docs
-              </a>
-            </Button>
-          </CardFooter>
-        </Card>
-
-        {/* Stats Section */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8">
-          <div className="text-center">
-            <h4 className="text-4xl font-bold">10k+</h4>
-            <p className="text-muted-foreground">Downloads</p>
-          </div>
-          <div className="text-center">
-            <h4 className="text-4xl font-bold">99%</h4>
-            <p className="text-muted-foreground">Success Rate</p>
-          </div>
-          <div className="text-center">
-            <h4 className="text-4xl font-bold">50ms</h4>
-            <p className="text-muted-foreground">Avg. Response</p>
-          </div>
-          <div className="text-center">
-            <h4 className="text-4xl font-bold">4.9★</h4>
-            <p className="text-muted-foreground">Rating</p>
+            <CodeDisplay />
           </div>
         </section>
       </main>
