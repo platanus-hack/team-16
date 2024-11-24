@@ -4,9 +4,9 @@ Turn any website into LLM structured data.
 ## Usage Example
 
 
-import { ScrapesterClient } from 'scrapester';
+import { ScrapesterApp } from 'scrapester';
 
-const client = new ScrapesterClient('your-api-key');
+const client = new ScrapesterApp('your-api-key');
 
 // Scrape a single URL
 const result = await client.scrape('https://example.com');
