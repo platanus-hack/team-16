@@ -1,12 +1,31 @@
 'use client'
 
-import { Download, Copy } from 'lucide-react'
+import { Download, Copy, RefreshCw } from 'lucide-react'
 import { Button } from '../components/ui/button'
 import { Card, CardContent } from '../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import ReactMarkdown from 'react-markdown'
 
-export function CrawlResults({ data }) {
+export function CrawlResults({ data, onRetry }) {
+  // Verificar si hay datos
+  if (!data?.data?.length) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4 min-h-[400px]">
+        <p className="text-lg text-muted-foreground text-center">
+          No pages were found during the crawl.
+        </p>
+        <Button 
+          variant="outline"
+          onClick={onRetry}
+          className="flex items-center gap-2"
+        >
+          <RefreshCw className="h-4 w-4" />
+          Try Again
+        </Button>
+      </div>
+    );
+  }
+
   const handleDownload = () => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -29,14 +48,24 @@ export function CrawlResults({ data }) {
         <h2 className="text-lg font-semibold">
            Pages Scraped: {data.stats.pages_crawled} 
         </h2>
-        <Button 
-          variant="outline"
-          onClick={handleDownload}
-          className="flex items-center gap-2"
-        >
-          <Download className="h-4 w-4" />
-          Download Results JSON
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline"
+            onClick={onRetry}
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Retry
+          </Button>
+          <Button 
+            variant="outline"
+            onClick={handleDownload}
+            className="flex items-center gap-2"
+          >
+            <Download className="h-4 w-4" />
+            Download Results JSON
+          </Button>
+        </div>
       </div>
 
       <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2">

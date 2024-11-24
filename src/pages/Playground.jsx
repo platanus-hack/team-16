@@ -409,7 +409,10 @@ export default function PlaygroundPage() {
                 {activeTab === "scrape" && scrapeResults && (<ScrapeResults data={scrapeResults} />
                 )}
                 {activeTab === "crawl" && crawlResults && (
-                  <CrawlResults data={crawlResults} />
+                  <CrawlResults 
+                    data={crawlResults} 
+                    onRetry={handleCrawl} 
+                  />
                 )}
                 {!scrapeResults && !crawlResults && <EmptyState />}
               </div>
