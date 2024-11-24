@@ -1,34 +1,34 @@
 ---
 title: 'Node.js SDK'
-description: 'Official Node.js SDK for Scapester API'
+description: 'Official Node.js SDK for Scrapester API'
 ---
 
 ## Overview
 
-Scapester Node.js SDK provides a simple wrapper around the Scapester API to help you transform web content into structured data.
+Scrapester Node.js SDK provides a simple wrapper around the Scrapester API to help you transform web content into structured data.
 
 ## Installation
 
-Install the Scapester Node.js SDK using npm:
+Install the Scrapester Node.js SDK using npm:
 
 <CodeGroup>
   ```bash npm
-  npm install scapester
+  npm install scrapester
   ```
 </CodeGroup>
 
 ## Basic Usage
 
-1. Get an API key from [scapester.com](https://scapester.com)
-2. Set the API key as an environment variable `SCAPESTER_API_KEY` or pass it directly to the ScapesterApp class
+1. Get an API key from [scrapester.lol](https://scrapester.lol)
+2. Set the API key as an environment variable `SCRAPESTER_API_KEY` or pass it directly to the ScrapesterApp class
 
 Here's a complete example with error handling:
 
 <CodeGroup>
   ```typescript TypeScript
-  import { ScapesterApp, ScrapeParams, ScrapeResponse } from 'scapester';
+  import { ScrapesterApp, ScrapeParams, ScrapeResponse } from 'scrapester';
 
-  const app = new ScapesterApp({apiKey: "sk-YOUR_API_KEY"});
+  const app = new ScrapesterApp({apiKey: "sk-YOUR_API_KEY"});
 
   // Scrape a website
   const scrapeResponse = await app.scrapeUrl('https://example.com', {
@@ -43,9 +43,9 @@ Here's a complete example with error handling:
   ```
 
   ```javascript JavaScript
-  const { ScapesterApp } = require('scapester');
+  const { ScrapesterApp } = require('scrapester');
 
-  const app = new ScapesterApp({apiKey: "sk-YOUR_API_KEY"});
+  const app = new ScrapesterApp({apiKey: "sk-YOUR_API_KEY"});
 
   // Scrape a website
   const scrapeResponse = await app.scrapeUrl('https://example.com', {

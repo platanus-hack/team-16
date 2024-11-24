@@ -1,21 +1,21 @@
 ---
 title: 'Quickstart'
-description: 'Learn how to use Scapester to scrape and transform web content in minutes.'
+description: 'Learn how to use Scrapester to scrape and transform web content in minutes.'
 ---
 
 ## Overview
 
-Scapester is an API service that transforms web content into clean, structured data formats. Simply provide a URL, and Scapester will return the content in your preferred format - whether that's markdown, structured JSON, or raw HTML.
+Scrapester is an API service that transforms web content into clean, structured data formats. Simply provide a URL, and Scrapester will return the content in your preferred format - whether that's markdown, structured JSON, or raw HTML.
 
 ## Installation
 
 <CodeGroup>
 ```bash Node
-npm install scapester
+npm i scrapester
 ```
 
 ```bash Python
-pip install scapester-py
+pip install scrapester
 ```
 </CodeGroup>
 
@@ -23,9 +23,9 @@ pip install scapester-py
 
 <CodeGroup>
 ```javascript Node
-import { ScapesterApp } from 'scapester';
+import { ScrapesterApp } from 'scrapester';
 
-const app = new ScapesterApp('sk-YOUR_API_KEY');
+const app = new ScrapesterApp('sk-YOUR_API_KEY');
 
 // Scrape a website
 const result = await app.scrapeUrl(
@@ -36,9 +36,9 @@ console.log(result);
 ```
 
 ```python Python
-from scapester import ScapesterApp
+from scrapester import ScrapesterApp
 
-app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+app = ScrapesterApp(api_key="sk-YOUR_API_KEY")
 
 # Scrape a website
 result = app.scrape_url(
@@ -71,7 +71,7 @@ print(result)
 ## Advanced Features
 
 ### Page Interactions
-Scapester allows you to interact with pages before scraping. This is useful for handling dynamic content or login flows:
+Scrapester allows you to interact with pages before scraping. This is useful for handling dynamic content or login flows:
 
 <CodeGroup>
   <CodeBlock label="Python" active>

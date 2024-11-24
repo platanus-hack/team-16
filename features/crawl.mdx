@@ -5,7 +5,7 @@ description: 'Recursively crawl websites and extract structured content'
 
 ## Overview
 
-Scapester can recursively crawl through websites, gathering content from all accessible pages while handling:
+Scrapester can recursively crawl through websites, gathering content from all accessible pages while handling:
 
 - **Smart Navigation**: Uses sitemaps and follows links intelligently
 - **Dynamic Content**: Handles JavaScript-rendered content and single-page applications
@@ -25,11 +25,11 @@ Scapester can recursively crawl through websites, gathering content from all acc
 
 <CodeGroup>
 ```bash npm
-npm install scapester
+npm install scrapester
 ```
 
 ```bash pip
-pip install scapester-py
+pip install scrapester
 ```
 </CodeGroup>
 
@@ -37,9 +37,9 @@ pip install scapester-py
 
 <CodeGroup>
 ```python Python
-from scapester import ScapesterApp
+from scrapester import ScrapesterApp
 
-app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+app = ScrapesterApp(api_key="sk-YOUR_API_KEY")
 
 # Crawl a website
 crawl_status = app.crawl_url(
@@ -56,9 +56,9 @@ print(crawl_status)
 ```
 
 ```javascript Node
-import { ScapesterApp } from 'scapester';
+import { ScrapesterApp } from 'scrapester';
 
-const app = new ScapesterApp('sk-YOUR_API_KEY');
+const app = new ScrapesterApp('sk-YOUR_API_KEY');
 
 // Crawl a website
 const crawlStatus = await app.crawlUrl('https://example.com', {
@@ -79,7 +79,7 @@ When using async crawl functions or direct API calls, you'll receive a job ID:
 {
   "success": true,
   "id": "crawl-123-456-789",
-  "url": "https://api.scapester.com/v1/crawl/crawl-123-456-789"
+  "url": "https://api.scrapester.lol/v1/crawl/crawl-123-456-789"
 }
 ```
 
@@ -112,7 +112,7 @@ The response varies based on the crawl's progress:
   "completed": 10,
   "creditsUsed": 10,
   "expiresAt": "2024-00-00T00:00:00.000Z",
-  "next": "https://api.scapester.com/v1/crawl/123-456-789?skip=10",
+  "next": "https://api.scrapester.lol/v1/crawl/123-456-789?skip=10",
   "data": [
     {
       "markdown": "# Example Page\nContent here...",
@@ -136,9 +136,9 @@ Monitor crawl progress in real-time:
 <CodeGroup>
 ```python Python
 import asyncio
-from scapester import ScapesterApp
+from scrapester import ScrapesterApp
 
-app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+app = ScrapesterApp(api_key="sk-YOUR_API_KEY")
 
 def on_document(detail):
     print("Document:", detail)
@@ -169,7 +169,7 @@ asyncio.run(start_crawl())
 ```
 
 ```javascript Node
-const app = new ScapesterApp('sk-YOUR_API_KEY');
+const app = new ScrapesterApp('sk-YOUR_API_KEY');
 
 const watcher = await app.crawlUrlAndWatch('example.com', {
     excludePaths: ['blog/*'],
@@ -195,7 +195,7 @@ watcher.addEventListener("done", (state) => {
 Receive real-time updates about your crawl progress:
 
 ```bash
-curl -X POST https://api.scapester.com/v1/crawl \
+curl -X POST https://api.scrapester.lol/v1/crawl \
     -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer sk-YOUR_API_KEY' \
     -d '{
@@ -207,7 +207,7 @@ curl -X POST https://api.scapester.com/v1/crawl \
 
 ### Webhook Events
 
-Scapester sends four types of webhook events:
+Scrapester sends four types of webhook events:
 
 - `crawl.started`: When the crawl begins
 - `crawl.page`: For each successfully crawled page

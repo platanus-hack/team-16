@@ -5,7 +5,7 @@ description: 'Transform any URL into clean, structured data'
 
 ## Overview
 
-Scapester converts web pages into clean, structured formats ideal for data processing and LLM applications.
+Scrapester converts web pages into clean, structured formats ideal for data processing and LLM applications.
 
 - **Smart Handling**: Manages proxies, rate limits, and JavaScript-rendered content
 - **Multiple Formats**: Outputs clean markdown, structured JSON, raw HTML, or screenshots
@@ -17,11 +17,11 @@ Scapester converts web pages into clean, structured formats ideal for data proce
 
 <CodeGroup>
 ```bash npm
-npm install scapester
+npm install scrapester
 ```
 
 ```bash pip
-pip install scapester-py
+pip install scrapester
 ```
 </CodeGroup>
 
@@ -29,9 +29,9 @@ pip install scapester-py
 
 <CodeGroup>
 ```javascript Node
-import { ScapesterApp } from 'scapester';
+import { ScrapesterApp } from 'scrapester';
 
-const app = new ScapesterApp('sk-YOUR_API_KEY');
+const app = new ScrapesterApp('sk-YOUR_API_KEY');
 
 // Scrape a website
 const result = await app.scrapeUrl('example.com', {
@@ -41,9 +41,9 @@ console.log(result);
 ```
 
 ```python Python
-from scapester import ScapesterApp
+from scrapester import ScrapesterApp
 
-app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+app = ScrapesterApp(api_key="sk-YOUR_API_KEY")
 
 # Scrape a website
 result = app.scrape_url(
@@ -92,9 +92,9 @@ curl -X POST https://api.scapester.com/v1/scrape \
 ```
 
 ```python Python
-from scapester import ScapesterApp
+from scrapester import ScrapesterApp
 
-app = ScapesterApp(api_key="sk-YOUR_API_KEY")
+app = ScrapesterApp(api_key="sk-YOUR_API_KEY")
 
 result = app.scrape_url('example.com', {
     'formats': ['extract'],
@@ -106,7 +106,7 @@ print(result['extract'])
 ```
 
 ```javascript Node
-const app = new ScapesterApp('sk-YOUR_API_KEY');
+const app = new ScrapesterApp('sk-YOUR_API_KEY');
 
 const result = await app.scrapeUrl('example.com', {
     formats: ['extract'],
@@ -180,7 +180,7 @@ const result = await app.scrapeUrl('example.com', {
 
 ## Error Handling
 
-Scapester provides detailed error information when something goes wrong:
+Scrapester provides detailed error information when something goes wrong:
 
 ```json
 {
