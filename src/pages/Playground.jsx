@@ -92,31 +92,29 @@ export default function PlaygroundPage() {
       const response = await fetch("https://scrapester.bugster.app/v1/scrape", {
         method: "POST",
         headers: {
-          Authorization: "Bearer platanus-hack",
+          "Authorization": "Bearer platanus-hack",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          url: scrapeUrl,
-        }),
+          "url": scrapeUrl
+        })
       });
-      alert(response.success)
-      if (!response.success) {
-        throw new Error("Network response was not ok");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-
+      console.log("Scrape response:", data);
 
       setIsLoading(false);
       setScrapeResults(data);
     } catch (error) {
       console.error("Error:", error);
-      console.log(error);
-
       setIsLoading(false);
       setUrlError("Error fetching data. Please try again.");
     }
-  };
+};
 
   const handleCrawl = async () => {
     if (!validateUrl(crawlUrl)) return;
